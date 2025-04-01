@@ -2,84 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>LIFELAB | Animated Tech Vibes</title>
+  <title>LIFELAB | Innovation Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: radial-gradient(ellipse at top, #1f1f47 0%, #0d0d1e 100%);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #ffffff;
+      color: white;
       height: 100vh;
+      overflow: hidden;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      overflow: hidden;
-      animation: gradientShift 10s ease infinite alternate;
+      animation: backgroundShift 10s ease-in-out infinite alternate;
+    }
+
+    .logo {
+      width: 400px;
+      max-width: 90%;
+      animation: float 3s ease-in-out infinite, fadeIn 2s ease-in;
+      filter: drop-shadow(0 0 15px #00c6ff);
     }
 
     h1 {
-      font-size: 3em;
-      background: linear-gradient(to right, #00c6ff, #0072ff);
+      margin-top: 20px;
+      font-size: 2.5em;
+      background: linear-gradient(to right, #00c6ff, #8be9fd);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: fadeInUp 1s ease-in-out;
+      animation: fadeInUp 2s ease-in-out;
     }
 
     p {
+      margin-top: 10px;
       font-size: 1.2em;
       color: #ccc;
-      margin-top: 10px;
-      animation: fadeInUp 1.5s ease-in-out;
+      animation: fadeInUp 2.5s ease-in-out;
     }
 
-    .robot {
-      font-size: 5em;
-      animation: float 2s ease-in-out infinite, spin 10s linear infinite;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 0 10px #00c6ff);
-    }
-
-    .lights {
+    .pulse-circle {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-
-    .lights span {
-      position: absolute;
-      display: block;
-      width: 20px;
-      height: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      animation: move 20s linear infinite;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
+      background: rgba(0, 198, 255, 0.1);
+      animation: pulse 4s infinite;
+      z-index: 0;
     }
-
-    .lights span:nth-child(1) { left: 10%; animation-delay: 0s; }
-    .lights span:nth-child(2) { left: 25%; animation-delay: 2s; }
-    .lights span:nth-child(3) { left: 40%; animation-delay: 4s; }
-    .lights span:nth-child(4) { left: 60%; animation-delay: 6s; }
-    .lights span:nth-child(5) { left: 80%; animation-delay: 8s; }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+      50% { transform: translateY(-10px); }
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     @keyframes fadeInUp {
@@ -87,27 +72,21 @@
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes move {
-      0% { top: -10%; transform: scale(0.5); }
-      100% { top: 110%; transform: scale(1.2); }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(2); opacity: 0; }
     }
 
-    @keyframes gradientShift {
-      0% {
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      }
-      100% {
-        background: linear-gradient(135deg, #1a2980, #26d0ce);
-      }
+    @keyframes backgroundShift {
+      0% { background: radial-gradient(ellipse at top, #1f1f47, #0d0d1e); }
+      100% { background: radial-gradient(ellipse at bottom, #2c3e50, #1a1a2e); }
     }
   </style>
 </head>
 <body>
-  <div class="lights">
-    <span></span><span></span><span></span><span></span><span></span>
-  </div>
-  <div class="robot">🤖</div>
+  <div class="pulse-circle"></div>
+  <img src="LIFELAB ONLY PC RED TRANS.png" alt="LIFELAB Logo" class="logo" />
   <h1>Welcome to LIFELAB</h1>
-  <p>Where tech meets imagination ⚡</p>
+  <p>Igniting Innovation. Empowering Ideas.</p>
 </body>
 </html>
