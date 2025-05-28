@@ -1,110 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>LIFELAB | Future Forward</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      height: 100vh;
-      background: radial-gradient(circle at center, #1b2735, #090a0f);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      overflow: hidden;
-      color: white;
-      position: relative;
-    }
-
-    .logo {
-      width: 350px;
-      max-width: 80%;
-      animation: float 3s ease-in-out infinite, glow 4s ease-in-out infinite alternate;
-      z-index: 2;
-    }
-
-    h1 {
-      font-size: 2.5em;
-      margin-top: 20px;
-      background: linear-gradient(to right, #00fff7, #8be9fd);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: fadeInUp 2s ease-in-out;
-      z-index: 2;
-    }
-
-    p {
-      font-size: 1.2em;
-      margin-top: 10px;
-      color: #ccc;
-      animation: fadeInUp 2.5s ease-in-out;
-      z-index: 2;
-    }
-
-    .particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    .particles span {
-      position: absolute;
-      display: block;
-      width: 6px;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      animation: rise 10s linear infinite;
-      border-radius: 50%;
-    }
-
-    /* Position random particles */
-    .particles span:nth-child(1) { left: 10%; animation-delay: 0s; }
-    .particles span:nth-child(2) { left: 20%; animation-delay: 2s; }
-    .particles span:nth-child(3) { left: 35%; animation-delay: 4s; }
-    .particles span:nth-child(4) { left: 55%; animation-delay: 6s; }
-    .particles span:nth-child(5) { left: 70%; animation-delay: 8s; }
-    .particles span:nth-child(6) { left: 85%; animation-delay: 10s; }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-
-    @keyframes glow {
-      0% { filter: drop-shadow(0 0 10px #00fff7); }
-      100% { filter: drop-shadow(0 0 30px #8be9fd); }
-    }
-
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(40px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes rise {
-      0% { top: 110%; opacity: 0.2; transform: scale(0.5); }
-      100% { top: -10%; opacity: 0; transform: scale(1); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Experience Infographic - LifeLab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+        }
+        .infographic-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease-in-out;
+        }
+        .infographic-card:hover {
+            transform: translateY(-5px);
+        }
+        .icon-bg {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .bg-gradient-purple-blue {
+            background-image: linear-gradient(to right, #8B5CF6, #3B82F6);
+        }
+        .bg-gradient-teal-green {
+            background-image: linear-gradient(to right, #14B8A6, #10B981);
+        }
+        .bg-gradient-orange-red {
+            background-image: linear-gradient(to right, #F97316, #EF4444);
+        }
+         .bg-gradient-pink-purple {
+            background-image: linear-gradient(to right, #EC4899, #D946EF);
+        }
+        .section-title-underline {
+            display: inline-block;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        .section-title-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60%;
+            height: 3px;
+            background-color: #3B82F6; /* Blue accent */
+            border-radius: 2px;
+        }
+        .stat-card {
+            border: 1px solid #e5e7eb; /* Light gray border */
+        }
+        .lifelab-logo {
+            max-height: 70px; /* Adjust as needed */
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
-<body>
-  <div class="particles">
-    <span></span><span></span><span></span><span></span><span></span><span></span>
-  </div>
+<body class="antialiased">
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-5xl">
 
-  <img src="LIFELAB ONLY PC RED TRANS.png" alt="LIFELAB Logo" class="logo" />
-  <h1>LIFELAB: Future Forward</h1>
-  <p>Technology meets imagination. Designed to inspire.</p>
+        <header class="text-center mb-10 md:mb-16">
+            <img src="https://placehold.co/200x70/E71939/FFFFFF?text=LifeLab+Logo" alt="LifeLab Logo" class="mx-auto lifelab-logo" onerror="this.onerror=null;this.src='https://placehold.co/200x70/CCCCCC/FFFFFF?text=Logo+Not+Found';">
+            <h1 class="text-4xl sm:text-5xl font-bold gradient-text bg-gradient-purple-blue mb-3">
+                Elevating Customer Experience (CX)
+            </h1>
+            <p class="text-lg text-gray-600">Understanding the Journey to Customer Delight</p>
+        </header>
+
+        <section class="infographic-card mb-12">
+            <div class="flex items-start">
+                <div class="icon-bg bg-blue-100">
+                    <i class="fas fa-comments text-3xl text-blue-500"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2 section-title-underline">What is Customer Experience?</h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        Customer Experience (CX) is the overall perception a customer has of a company or its brand based on all their interactions over time. It encompasses every aspect of a company's offering—from marketing, sales, and customer service to the product or service itself.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-10 section-title-underline">Key Pillars of Great CX</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="infographic-card">
+                    <div class="flex items-center mb-3">
+                        <div class="icon-bg bg-purple-100">
+                            <i class="fas fa-user-cog text-2xl text-purple-500"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Personalization</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm">Tailoring experiences, products, and communications to individual customer needs and preferences.</p>
+                </div>
+
+                <div class="infographic-card">
+                    <div class="flex items-center mb-3">
+                        <div class="icon-bg bg-teal-100">
+                            <i class="fas fa-network-wired text-2xl text-teal-500"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Omni-channel Consistency</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm">Providing a seamless and unified experience across all channels and touchpoints (e.g., web, mobile, in-store).</p>
+                </div>
+
+                <div class="infographic-card">
+                    <div class="flex items-center mb-3">
+                        <div class="icon-bg bg-green-100">
+                            <i class="fas fa-headset text-2xl text-green-500"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Proactive Support</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm">Anticipating customer needs and addressing potential issues before they arise.</p>
+                </div>
+
+                <div class="infographic-card">
+                    <div class="flex items-center mb-3">
+                        <div class="icon-bg bg-yellow-100">
+                            <i class="fas fa-hand-holding-heart text-2xl text-yellow-500"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Effortless Interaction</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm">Making it easy for customers to achieve their goals with minimal friction.</p>
+                </div>
+
+                <div class="infographic-card">
+                    <div class="flex items-center mb-3">
+                        <div class="icon-bg bg-red-100">
+                            <i class="fas fa-bullhorn text-2xl text-red-500"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Valuing Feedback</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm">Actively listening to customer feedback, understanding it, and acting upon it to improve experiences.</p>
+                </div>
+
+                 <div class="infographic-card">
+                    <div class="flex items-center mb-3">
+                        <div class="icon-bg bg-indigo-100">
+                            <i class="fas fa-shield-alt text-2xl text-indigo-500"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Building Trust</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm">Ensuring reliability, transparency, and data security to foster customer confidence.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-10 section-title-underline">Why CX Matters</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="infographic-card text-center p-6 stat-card">
+                    <i class="fas fa-medal text-4xl gradient-text bg-gradient-teal-green mb-3"></i>
+                    <h4 class="text-lg font-semibold text-gray-800">Increased Loyalty</h4>
+                    <p class="text-sm text-gray-600">Happy customers are more likely to stay.</p>
+                </div>
+                <div class="infographic-card text-center p-6 stat-card">
+                    <i class="fas fa-chart-line text-4xl gradient-text bg-gradient-purple-blue mb-3"></i>
+                    <h4 class="text-lg font-semibold text-gray-800">Higher Revenue</h4>
+                    <p class="text-sm text-gray-600">Loyal customers spend more.</p>
+                </div>
+                <div class="infographic-card text-center p-6 stat-card">
+                    <i class="fas fa-thumbs-up text-4xl gradient-text bg-gradient-orange-red mb-3"></i>
+                    <h4 class="text-lg font-semibold text-gray-800">Better Reputation</h4>
+                    <p class="text-sm text-gray-600">Positive word-of-mouth.</p>
+                </div>
+                <div class="infographic-card text-center p-6 stat-card">
+                    <i class="fas fa-user-minus text-4xl gradient-text bg-gradient-pink-purple mb-3"></i>
+                    <h4 class="text-lg font-semibold text-gray-800">Reduced Churn</h4>
+                    <p class="text-sm text-gray-600">Lower customer attrition rates.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="infographic-card mb-12">
+            <div class="flex items-start">
+                 <div class="icon-bg bg-pink-100">
+                    <i class="fas fa-ruler-combined text-3xl text-pink-500"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4 section-title-underline">Measuring CX: Key Metrics</h2>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-3"></i>
+                            <span class="font-semibold text-gray-700">NPS (Net Promoter Score):</span>
+                            <span class="text-gray-600 ml-2">Measures customer loyalty and willingness to recommend.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-smile text-green-400 mr-3"></i>
+                            <span class="font-semibold text-gray-700">CSAT (Customer Satisfaction):</span>
+                            <span class="text-gray-600 ml-2">Measures satisfaction with a specific interaction or product.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-tachometer-alt text-blue-400 mr-3"></i>
+                            <span class="font-semibold text-gray-700">CES (Customer Effort Score):</span>
+                            <span class="text-gray-600 ml-2">Measures how much effort a customer had to exert.</span>
+                        </li>
+                         <li class="flex items-center">
+                            <i class="fas fa-clock text-purple-400 mr-3"></i>
+                            <span class="font-semibold text-gray-700">CLTV (Customer Lifetime Value):</span>
+                            <span class="text-gray-600 ml-2">Predicts the total revenue a business can expect from a single customer account.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 py-8 border-t border-gray-300">
+             <img src="https://placehold.co/150x50/E71939/FFFFFF?text=LifeLab" alt="LifeLab Logo" class="mx-auto lifelab-logo" style="max-height: 50px; margin-bottom: 15px;" onerror="this.onerror=null;this.src='https://placehold.co/150x50/CCCCCC/FFFFFF?text=Logo';">
+            
+            <p class="text-xl font-semibold gradient-text bg-gradient-purple-blue">
+                Invest in Customer Experience for Sustainable Growth.
+            </p>
+            <p class="text-sm text-gray-500 mt-2">
+                &copy; <span id="currentYear"></span> LifeLab CX Insights. All rights reserved.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
