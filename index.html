@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inno - Mini App</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -27,6 +28,7 @@
             left: 0;
             width: 100%;
             height: 100%;
+            padding-top: 2rem; /* Safe area for notch/status bar */
             transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
             backface-visibility: hidden;
         }
@@ -108,15 +110,15 @@
         <div class="w-full h-full bg-white md:rounded-[24px] overflow-hidden relative flex flex-col">
             
             <!-- App Screens Container -->
-            <main id="app-container" class="flex-grow pt-8 overflow-y-auto relative">
+            <main id="app-container" class="flex-grow relative overflow-hidden">
                 
                 <!-- Screen: Super App Home -->
-                <div id="super-app-home-screen" class="screen p-4 active">
+                <div id="super-app-home-screen" class="screen p-4 active overflow-y-auto">
                      <header class="text-center mb-6">
                         <h1 class="text-3xl font-bold text-gray-800">PC Super App</h1>
                         <p class="text-gray-500 mt-2">Your all-in-one portal</p>
                     </header>
-                    <div class="space-y-3">
+                    <div class="space-y-3 pb-20">
                         <h2 class="text-sm font-semibold text-gray-600 px-2">Mini Apps</h2>
                         <div onclick="showScreen('home-screen')" class="flex items-center space-x-4 bg-gray-100 p-4 rounded-xl cursor-pointer interactive-card">
                             <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center">
@@ -150,7 +152,7 @@
                 </div>
 
                 <!-- Screen: Inno Home -->
-                <div id="home-screen" class="screen p-4 hidden">
+                <div id="home-screen" class="screen p-4 hidden overflow-y-auto">
                     <header class="flex justify-between items-center mb-4">
                         <button onclick="showScreen('super-app-home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
@@ -172,7 +174,11 @@
                         <button onclick="showScreen('submission-screen')" class="bg-white text-red-600 font-bold py-2 px-6 rounded-full w-full shadow-md hover:bg-red-50 transition">Submit an Idea</button>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-4 pb-20">
+                         <div onclick="showScreen('profile-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            <p class="font-semibold text-sm">My Profile</p>
+                        </div>
                         <div onclick="showScreen('tracking-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
                             <p class="font-semibold text-sm">Track Ideas</p>
@@ -189,54 +195,56 @@
                              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                             <p class="font-semibold text-sm">Knowledge Bank</p>
                         </div>
-                        <div onclick="showScreen('chatbot-screen')" class="bg-gray-100 col-span-2 p-4 rounded-xl text-center cursor-pointer interactive-card flex items-center justify-center space-x-3">
+                        <div onclick="showScreen('chatbot-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card flex items-center justify-center space-x-3">
                             <img src="Innobot.PNG" alt="Innobot Logo" class="h-8 w-8 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/40x40/ffffff/dc2626?text=Bot';">
-                            <p class="font-semibold text-sm">Ask Inno Chatbot</p>
+                            <p class="font-semibold text-sm">Ask InnoBot</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Screen: Idea Submission -->
-                <div id="submission-screen" class="screen p-4 hidden">
-                    <header class="flex items-center mb-6">
+                <div id="submission-screen" class="screen p-4 hidden flex flex-col">
+                    <header class="flex items-center mb-6 flex-shrink-0">
                         <button onclick="showScreen('home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
                         <h1 class="text-xl font-bold text-gray-800 ml-2">Submit an Idea</h1>
                     </header>
-                    <form id="idea-form" class="space-y-4">
-                        <div>
-                            <label for="idea-title" class="block text-sm font-medium text-gray-700 mb-1">Idea Title</label>
-                            <input type="text" id="idea-title" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" placeholder="e.g., Gamified Onboarding">
-                        </div>
-                        <div>
-                            <label for="idea-description" class="block text-sm font-medium text-gray-700 mb-1">Detailed Description</label>
-                            <textarea id="idea-description" rows="5" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" placeholder="Describe your idea clearly..."></textarea>
-                        </div>
-                        <div>
-                            <label for="idea-category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                            <select id="idea-category" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500">
-                                <option>Product Improvement</option>
-                                <option>New Feature</option>
-                                <option>Cost Saving</option>
-                                <option>Process Optimization</option>
-                            </select>
-                        </div>
-                        <div class="pt-4">
-                            <button type="submit" class="w-full bg-gradient-to-br from-red-500 to-red-700 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition">Submit Idea</button>
-                        </div>
-                    </form>
+                    <div class="flex-grow overflow-y-auto mobile-screen-content pr-1">
+                        <form id="idea-form" class="space-y-4">
+                            <div>
+                                <label for="idea-title" class="block text-sm font-medium text-gray-700 mb-1">Idea Title</label>
+                                <input type="text" id="idea-title" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" placeholder="e.g., Gamified Onboarding">
+                            </div>
+                            <div>
+                                <label for="idea-description" class="block text-sm font-medium text-gray-700 mb-1">Detailed Description</label>
+                                <textarea id="idea-description" rows="5" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" placeholder="Describe your idea clearly..."></textarea>
+                            </div>
+                            <div>
+                                <label for="idea-category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                                <select id="idea-category" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500">
+                                    <option>Product Improvement</option>
+                                    <option>New Feature</option>
+                                    <option>Cost Saving</option>
+                                    <option>Process Optimization</option>
+                                </select>
+                            </div>
+                            <div class="pt-4 pb-20">
+                                <button type="submit" class="w-full bg-gradient-to-br from-red-500 to-red-700 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition">Submit Idea</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <!-- Screen: Idea Tracking -->
-                <div id="tracking-screen" class="screen hidden">
-                   <header class="flex items-center mb-4 p-4">
+                <div id="tracking-screen" class="screen hidden flex flex-col">
+                   <header class="flex-shrink-0 flex items-center mb-4 p-4">
                         <button onclick="showScreen('home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
                         <h1 class="text-xl font-bold text-gray-800 ml-2">My Ideas</h1>
                     </header>
-                    <div class="px-4 mobile-screen-content h-[calc(100%-68px)] overflow-y-auto">
+                    <div class="px-4 pb-20 flex-grow mobile-screen-content overflow-y-auto">
                         <div id="idea-list" class="space-y-4">
                             <!-- Dynamic content will be injected here -->
                         </div>
@@ -244,29 +252,71 @@
                 </div>
 
                 <!-- Screen: Leaderboard -->
-                <div id="leaderboard-screen" class="screen hidden">
-                   <header class="flex items-center mb-4 p-4">
+                <div id="leaderboard-screen" class="screen hidden flex flex-col">
+                   <header class="flex-shrink-0 flex items-center mb-4 p-4">
                         <button onclick="showScreen('home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
                         <h1 class="text-xl font-bold text-gray-800 ml-2">Top Innovators</h1>
                     </header>
-                    <div class="px-4 mobile-screen-content h-[calc(100%-68px)] overflow-y-auto">
+                    <div class="px-4 pb-20 flex-grow mobile-screen-content overflow-y-auto">
                         <div id="leaderboard-list" class="space-y-3">
                             <!-- Dynamic content will be injected here -->
                         </div>
                     </div>
                 </div>
 
+                 <!-- Screen: My Profile -->
+                <div id="profile-screen" class="screen hidden flex flex-col">
+                   <header class="flex-shrink-0 flex items-center mb-4 p-4">
+                        <button onclick="showScreen('home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-800 ml-2">My Profile</h1>
+                    </header>
+                    <div class="px-4 pb-20 flex-grow mobile-screen-content overflow-y-auto space-y-6">
+                        <div class="text-center">
+                            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-red-500 to-red-700 mx-auto flex items-center justify-center text-white text-4xl font-bold">
+                                IG
+                            </div>
+                            <h2 class="text-2xl font-bold mt-4" id="profile-name">Isaac Galang</h2>
+                            <p class="text-gray-500">Innovator</p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div class="bg-gray-100 p-3 rounded-lg">
+                                <p class="text-sm text-gray-500">Ideas Submitted</p>
+                                <p id="ideas-submitted-stat" class="text-2xl font-bold"></p>
+                            </div>
+                            <div class="bg-gray-100 p-3 rounded-lg">
+                                <p class="text-sm text-gray-500">Ideas Approved</p>
+                                <p id="ideas-approved-stat" class="text-2xl font-bold text-green-600"></p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                            <h3 class="font-bold text-gray-800 mb-2">My Stars History</h3>
+                            <canvas id="starChart"></canvas>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                            <h3 class="font-bold text-gray-800 mb-2">My Vouchers</h3>
+                            <div id="voucher-list" class="space-y-3">
+                                <!-- Vouchers will be injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Screen: Rewards -->
-                <div id="rewards-screen" class="screen hidden">
-                     <header class="flex items-center mb-4 p-4">
+                <div id="rewards-screen" class="screen hidden flex flex-col">
+                     <header class="flex-shrink-0 flex items-center mb-4 p-4">
                         <button onclick="showScreen('home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
                         <h1 class="text-xl font-bold text-gray-800 ml-2">Redeem Rewards</h1>
                     </header>
-                    <div class="px-4 mobile-screen-content h-[calc(100%-68px)] overflow-y-auto">
+                    <div class="px-4 pb-20 flex-grow mobile-screen-content overflow-y-auto">
                         <div class="bg-green-500 text-white p-4 rounded-xl mb-6 text-center">
                             <p class="text-sm opacity-90">Your Balance</p>
                             <div class="flex items-center justify-center space-x-2">
@@ -281,14 +331,14 @@
                 </div>
 
                 <!-- Screen: Knowledge Bank -->
-                <div id="knowledge-screen" class="screen hidden">
-                    <header class="flex items-center mb-4 p-4">
+                <div id="knowledge-screen" class="screen hidden flex flex-col">
+                    <header class="flex-shrink-0 flex items-center mb-4 p-4">
                         <button onclick="showScreen('home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
                         <h1 class="text-xl font-bold text-gray-800 ml-2">Knowledge Bank</h1>
                     </header>
-                    <div class="px-4 mobile-screen-content h-[calc(100%-68px)] overflow-y-auto">
+                    <div class="px-4 pb-20 flex-grow mobile-screen-content overflow-y-auto">
                         <div class="relative mb-4">
                             <input type="text" class="w-full pl-10 pr-4 py-2 border rounded-full bg-gray-100" placeholder="Search articles...">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
@@ -300,8 +350,8 @@
                 </div>
                 
                 <!-- Screen: Chatbot -->
-                <div id="chatbot-screen" class="screen hidden flex flex-col h-full">
-                    <header class="flex items-center p-4 border-b">
+                <div id="chatbot-screen" class="screen hidden flex flex-col h-full pt-0">
+                    <header class="flex-shrink-0 flex items-center p-4 border-b pt-8">
                         <button onclick="showScreen('home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
@@ -329,7 +379,7 @@
                             </div>
                         </div>
                     </div>
-                    <footer class="p-4 border-t">
+                    <footer class="p-4 border-t flex-shrink-0">
                         <div class="flex items-center bg-gray-100 rounded-full">
                             <input type="text" class="flex-grow bg-transparent px-4 py-2 focus:outline-none" placeholder="Type a message...">
                             <button class="p-3 text-red-500">
@@ -371,7 +421,10 @@
         const appState = {
             user: {
                 name: "Isaac Galang",
-                stars: 1000
+                stars: 1000,
+                vouchers: [
+                    { id: 1, name: "Ate Arls Longsilog", description: "1 Free Longsilog Meal", icon: '🍳' }
+                ]
             },
             ideas: [
                 { id: 1, title: "AI-Powered Customer Support", description: "Integrate an AI chatbot to handle common customer queries, freeing up human agents for more complex issues.", category: "Process Optimization", status: "Approved", progress: 3, totalSteps: 3, starsAwarded: 500 },
@@ -383,7 +436,7 @@
                 { rank: 1, name: 'Kim', stars: 5250, medal: '🥇' },
                 { rank: 2, name: 'Kevin', stars: 4800, medal: '🥈' },
                 { rank: 3, name: 'Trish', stars: 4750, medal: '🥉' },
-                { rank: 4, name: 'Alex', stars: 3200, medal: '' },
+                { rank: 4, name: 'Isaac', stars: 4500, medal: '' },
                 { rank: 5, name: 'Sam', stars: 2100, medal: '' },
             ],
             rewards: [
@@ -407,6 +460,8 @@
             renderRewardsList();
             renderKnowledgeList();
             renderLeaderboard();
+            renderProfileStats();
+            renderVouchers();
         }
         
         function animateValue(obj, start, end, duration) {
@@ -542,6 +597,62 @@
                 listEl.innerHTML += articleCard;
             });
         }
+        
+        function renderProfileStats() {
+            document.getElementById('ideas-submitted-stat').textContent = appState.ideas.length;
+            document.getElementById('ideas-approved-stat').textContent = appState.ideas.filter(idea => idea.status === 'Approved').length;
+        }
+
+        function renderVouchers() {
+            const listEl = document.getElementById('voucher-list');
+            listEl.innerHTML = '';
+            if (appState.user.vouchers.length === 0) {
+                listEl.innerHTML = `<p class="text-center text-gray-500">No vouchers yet. Redeem rewards to get some!</p>`;
+                return;
+            }
+            appState.user.vouchers.forEach(voucher => {
+                const voucherCard = `
+                    <div class="flex items-center p-3 rounded-lg bg-gray-50 border">
+                        <div class="text-2xl">${voucher.icon}</div>
+                        <div class="ml-4">
+                            <p class="font-bold text-gray-800">${voucher.name}</p>
+                            <p class="text-sm text-gray-500">${voucher.description}</p>
+                        </div>
+                    </div>
+                `;
+                listEl.innerHTML += voucherCard;
+            });
+        }
+
+        let starChartInstance;
+        function renderStarChart() {
+            const ctx = document.getElementById('starChart').getContext('2d');
+            if (starChartInstance) {
+                starChartInstance.destroy();
+            }
+            starChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Stars Earned',
+                        data: [200, 450, 300, 800, 1200, 1000], // Sample data
+                        borderColor: 'rgba(220, 38, 38, 1)',
+                        backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
 
         // --- NAVIGATION & INTERACTIONS ---
         let currentScreen = 'super-app-home-screen';
@@ -560,6 +671,10 @@
                     renderIdeaList();
                 } else if (screenId === 'leaderboard-screen') {
                     renderLeaderboard();
+                } else if (screenId === 'profile-screen') {
+                    renderProfileStats();
+                    renderVouchers();
+                    renderStarChart();
                 }
                 
                 setTimeout(() => {
@@ -592,6 +707,7 @@
             appState.ideas.push(newIdea);
             
             this.reset();
+            renderProfileStats();
             showModal('Success!', 'Your idea has been submitted for review.');
             setTimeout(() => {
                 closeModal();
@@ -645,6 +761,11 @@
             if(welcomeHeader) {
                 welcomeHeader.textContent = appState.user.name;
             }
+            const profileName = document.getElementById('profile-name');
+            if(profileName) {
+                profileName.textContent = appState.user.name;
+            }
+
 
             renderAll();
             // Set initial star balance without animation
