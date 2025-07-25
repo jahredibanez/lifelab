@@ -3,240 +3,672 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Experience Infographic - LifeLab</title>
+    <title>Inno - Mini App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light blue-gray background */
+            overflow: hidden;
         }
-        .infographic-card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease-in-out;
+        /* Animated Background for Desktop */
+        #super-app-bg {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
         }
-        .infographic-card:hover {
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Custom scrollbar */
+        .mobile-screen-content::-webkit-scrollbar { width: 4px; }
+        .mobile-screen-content::-webkit-scrollbar-track { background: #f1f1f1; }
+        .mobile-screen-content::-webkit-scrollbar-thumb { background: #888; border-radius: 2px; }
+        .mobile-screen-content::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* Screen Transitions */
+        .screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            backface-visibility: hidden;
+        }
+        .screen.hidden {
+            transform: translateX(100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .screen.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        .screen.exiting {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        
+        /* Card hover effect */
+        .interactive-card {
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+        .interactive-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        .icon-bg {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+
+        .progress-bar {
+            display: flex;
+            height: 8px;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            background-color: #dc2626;
+            transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .progress-bar-rejected {
+             background-color: #9ca3af;
+        }
+        
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 100;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 16px;
-            flex-shrink: 0;
+            transition: opacity 0.5s ease;
         }
-        .gradient-text {
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #dc2626;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
         }
-        .bg-gradient-purple-blue {
-            background-image: linear-gradient(to right, #8B5CF6, #3B82F6);
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        .bg-gradient-teal-green {
-            background-image: linear-gradient(to right, #14B8A6, #10B981);
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+            /* Remove desktop frame and background */
+            .pc-super-app-window {
+                width: 100%;
+                height: 100%;
+                max-height: none;
+                padding: 0;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .pc-title-bar {
+                display: none;
+            }
+            #super-app-bg {
+                padding: 0;
+                background: none;
+            }
+            /* Make mobile frame fill the screen */
+            .mobile-app-frame {
+                width: 100vw;
+                height: 100vh;
+                padding: 0;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .mobile-app-inner {
+                border-radius: 0;
+            }
+            /* Hide desktop-only cosmetic elements */
+            .mobile-notch {
+                display: none;
+            }
+            /* Adjust for mobile safe areas */
+            #app-container {
+                padding-top: env(safe-area-inset-top, 2rem);
+            }
+            .mobile-nav-footer {
+                padding-bottom: env(safe-area-inset-bottom, 0);
+            }
         }
-        .bg-gradient-orange-red {
-            background-image: linear-gradient(to right, #F97316, #EF4444);
-        }
-         .bg-gradient-pink-purple {
-            background-image: linear-gradient(to right, #EC4899, #D946EF);
-        }
-        .section-title-underline {
-            display: inline-block;
-            position: relative;
-            padding-bottom: 8px;
-        }
-        .section-title-underline::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 60%;
-            height: 3px;
-            background-color: #3B82F6; /* Blue accent */
-            border-radius: 2px;
-        }
-        .stat-card {
-            border: 1px solid #e5e7eb; /* Light gray border */
-        }
-        .lifelab-logo {
-            max-height: 70px; /* Adjust as needed */
-            margin-bottom: 10px;
-        }
+
     </style>
 </head>
-<body class="antialiased">
-    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-5xl">
-
-        <header class="text-center mb-10 md:mb-16">
-            <img src="LIFELAB ONLY PC RED TRANS.png" alt="LifeLab Logo" class="mx-auto lifelab-logo" onerror="this.onerror=null;this.src='https://placehold.co/200x70/CCCCCC/FFFFFF?text=Logo+Not+Found';">
-            <h1 class="text-4xl sm:text-5xl font-bold gradient-text bg-gradient-purple-blue mb-3">
-                Elevating Customer Experience (CX)
-            </h1>
-            <p class="text-lg text-gray-600">Understanding the Journey to Customer Delight</p>
-        </header>
-
-        <section class="infographic-card mb-12">
-            <div class="flex items-start">
-                <div class="icon-bg bg-blue-100">
-                    <i class="fas fa-comments text-3xl text-blue-500"></i>
-                </div>
-                <div>
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-2 section-title-underline">What is Customer Experience?</h2>
-                    <p class="text-gray-700 leading-relaxed">
-                        Customer Experience (CX) is the overall perception a customer has of a company or its brand based on all their interactions over time. It encompasses every aspect of a company's offering—from marketing, sales, and customer service to the product or service itself.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 text-center mb-10 section-title-underline">Key Pillars of Great CX</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="infographic-card">
-                    <div class="flex items-center mb-3">
-                        <div class="icon-bg bg-purple-100">
-                            <i class="fas fa-user-cog text-2xl text-purple-500"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-800">Personalization</h3>
-                    </div>
-                    <p class="text-gray-600 text-sm">Tailoring experiences, products, and communications to individual customer needs and preferences.</p>
-                </div>
-
-                <div class="infographic-card">
-                    <div class="flex items-center mb-3">
-                        <div class="icon-bg bg-teal-100">
-                            <i class="fas fa-network-wired text-2xl text-teal-500"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-800">Omni-channel Consistency</h3>
-                    </div>
-                    <p class="text-gray-600 text-sm">Providing a seamless and unified experience across all channels and touchpoints (e.g., web, mobile, in-store).</p>
-                </div>
-
-                <div class="infographic-card">
-                    <div class="flex items-center mb-3">
-                        <div class="icon-bg bg-green-100">
-                            <i class="fas fa-headset text-2xl text-green-500"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-800">Proactive Support</h3>
-                    </div>
-                    <p class="text-gray-600 text-sm">Anticipating customer needs and addressing potential issues before they arise.</p>
-                </div>
-
-                <div class="infographic-card">
-                    <div class="flex items-center mb-3">
-                        <div class="icon-bg bg-yellow-100">
-                            <i class="fas fa-hand-holding-heart text-2xl text-yellow-500"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-800">Effortless Interaction</h3>
-                    </div>
-                    <p class="text-gray-600 text-sm">Making it easy for customers to achieve their goals with minimal friction.</p>
-                </div>
-
-                <div class="infographic-card">
-                    <div class="flex items-center mb-3">
-                        <div class="icon-bg bg-red-100">
-                            <i class="fas fa-bullhorn text-2xl text-red-500"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-800">Valuing Feedback</h3>
-                    </div>
-                    <p class="text-gray-600 text-sm">Actively listening to customer feedback, understanding it, and acting upon it to improve experiences.</p>
-                </div>
-
-                 <div class="infographic-card">
-                    <div class="flex items-center mb-3">
-                        <div class="icon-bg bg-indigo-100">
-                            <i class="fas fa-shield-alt text-2xl text-indigo-500"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-800">Building Trust</h3>
-                    </div>
-                    <p class="text-gray-600 text-sm">Ensuring reliability, transparency, and data security to foster customer confidence.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 text-center mb-10 section-title-underline">Why CX Matters</h2>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="infographic-card text-center p-6 stat-card">
-                    <i class="fas fa-medal text-4xl gradient-text bg-gradient-teal-green mb-3"></i>
-                    <h4 class="text-lg font-semibold text-gray-800">Increased Loyalty</h4>
-                    <p class="text-sm text-gray-600">Happy customers are more likely to stay.</p>
-                </div>
-                <div class="infographic-card text-center p-6 stat-card">
-                    <i class="fas fa-chart-line text-4xl gradient-text bg-gradient-purple-blue mb-3"></i>
-                    <h4 class="text-lg font-semibold text-gray-800">Higher Revenue</h4>
-                    <p class="text-sm text-gray-600">Loyal customers spend more.</p>
-                </div>
-                <div class="infographic-card text-center p-6 stat-card">
-                    <i class="fas fa-thumbs-up text-4xl gradient-text bg-gradient-orange-red mb-3"></i>
-                    <h4 class="text-lg font-semibold text-gray-800">Better Reputation</h4>
-                    <p class="text-sm text-gray-600">Positive word-of-mouth.</p>
-                </div>
-                <div class="infographic-card text-center p-6 stat-card">
-                    <i class="fas fa-user-minus text-4xl gradient-text bg-gradient-pink-purple mb-3"></i>
-                    <h4 class="text-lg font-semibold text-gray-800">Reduced Churn</h4>
-                    <p class="text-sm text-gray-600">Lower customer attrition rates.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="infographic-card mb-12">
-            <div class="flex items-start">
-                 <div class="icon-bg bg-pink-100">
-                    <i class="fas fa-ruler-combined text-3xl text-pink-500"></i>
-                </div>
-                <div>
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4 section-title-underline">Measuring CX: Key Metrics</h2>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <i class="fas fa-star text-yellow-400 mr-3"></i>
-                            <span class="font-semibold text-gray-700">NPS (Net Promoter Score):</span>
-                            <span class="text-gray-600 ml-2">Measures customer loyalty and willingness to recommend.</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-smile text-green-400 mr-3"></i>
-                            <span class="font-semibold text-gray-700">CSAT (Customer Satisfaction):</span>
-                            <span class="text-gray-600 ml-2">Measures satisfaction with a specific interaction or product.</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-tachometer-alt text-blue-400 mr-3"></i>
-                            <span class="font-semibold text-gray-700">CES (Customer Effort Score):</span>
-                            <span class="text-gray-600 ml-2">Measures how much effort a customer had to exert.</span>
-                        </li>
-                         <li class="flex items-center">
-                            <i class="fas fa-clock text-purple-400 mr-3"></i>
-                            <span class="font-semibold text-gray-700">CLTV (Customer Lifetime Value):</span>
-                            <span class="text-gray-600 ml-2">Predicts the total revenue a business can expect from a single customer account.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <footer class="text-center mt-12 py-8 border-t border-gray-300">
-             <img src="LIFELAB ONLY PC RED TRANS.png" alt="LifeLab Logo" class="mx-auto lifelab-logo" style="max-height: 50px; margin-bottom: 15px;" onerror="this.onerror=null;this.src='https://placehold.co/150x50/CCCCCC/FFFFFF?text=Logo';">
-            
-            <p class="text-xl font-semibold gradient-text bg-gradient-purple-blue">
-                Invest in Customer Experience for Sustainable Growth.
-            </p>
-            <p class="text-sm text-gray-500 mt-2">
-                &copy; <span id="currentYear"></span> LifeLab CX Insights. All rights reserved.
-            </p>
-        </footer>
+<body class="bg-gray-100 flex items-center justify-center h-screen p-4">
+    
+    <div id="preloader">
+        <div class="loader"></div>
     </div>
 
+    <!-- Super App Window -->
+    <div class="pc-super-app-window w-full max-w-5xl h-[90vh] max-h-[800px] bg-white rounded-xl shadow-2xl flex flex-col">
+        <!-- Title Bar -->
+        <div class="pc-title-bar flex-shrink-0 bg-gray-200 p-2 rounded-t-xl flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                <span class="w-3 h-3 bg-yellow-400 rounded-full"></span>
+                <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+            </div>
+            <div class="text-sm font-semibold text-gray-700">PC Super App</div>
+            <div class="w-16"></div>
+        </div>
+
+        <!-- Super App Content -->
+        <div id="super-app-bg" class="flex-grow p-8 flex items-center justify-center">
+            
+            <!-- Mobile App Frame -->
+            <div class="mobile-app-frame w-[375px] h-[750px] bg-black rounded-[40px] p-4 shadow-lg border-4 border-gray-600">
+                <div class="mobile-app-inner w-full h-full bg-white rounded-[24px] overflow-hidden relative flex flex-col">
+                    <!-- Notch -->
+                    <div class="mobile-notch absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-20"></div>
+                    
+                    <!-- App Screens Container -->
+                    <main id="app-container" class="flex-grow pt-8 overflow-y-auto relative">
+                        
+                        <!-- Screen: Super App Home -->
+                        <div id="super-app-home-screen" class="screen p-4 active">
+                             <header class="text-center mb-6">
+                                <img src="lifelab.png" alt="LifeLab Logo" class="mx-auto h-12" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/dc2626?text=LifeLab';">
+                                <p class="text-gray-500 mt-2">Your all-in-one portal</p>
+                            </header>
+                            <div class="space-y-3">
+                                <h2 class="text-sm font-semibold text-gray-600 px-2">Mini Apps</h2>
+                                <div onclick="showScreen('home-screen')" class="flex items-center space-x-4 bg-gray-100 p-4 rounded-xl cursor-pointer interactive-card">
+                                    <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800">Inno</p>
+                                        <p class="text-sm text-gray-500">Submit and track ideas</p>
+                                    </div>
+                                </div>
+                                <!-- Placeholder Apps -->
+                                <div class="flex items-center space-x-4 bg-gray-100 p-4 rounded-xl cursor-not-allowed opacity-60 interactive-card">
+                                    <div class="w-12 h-12 bg-gray-400 rounded-lg flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800">File MCP</p>
+                                        <p class="text-sm text-gray-500">Manage company files</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4 bg-gray-100 p-4 rounded-xl cursor-not-allowed opacity-60 interactive-card">
+                                    <div class="w-12 h-12 bg-gray-400 rounded-lg flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800">Trainings</p>
+                                        <p class="text-sm text-gray-500">Access learning materials</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Screen: Inno Home -->
+                        <div id="home-screen" class="screen p-4 hidden">
+                            <header class="flex justify-between items-center mb-6">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Welcome back,</p>
+                                    <h1 class="text-2xl font-bold text-gray-800">Kim Evangelista</h1>
+                                </div>
+                                <div class="flex items-center space-x-2 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                                    <span id="star-balance-home" class="font-bold text-lg">1,250</span>
+                                </div>
+                            </header>
+
+                            <div class="bg-red-600 text-white p-5 rounded-xl mb-6 text-center shadow-lg interactive-card">
+                                <h2 class="text-lg font-semibold mb-2">Have a brilliant idea?</h2>
+                                <p class="text-sm opacity-90 mb-4">Share it with us and earn stars!</p>
+                                <button onclick="showScreen('submission-screen')" class="bg-white text-red-600 font-bold py-2 px-6 rounded-full w-full shadow-md hover:bg-red-50 transition">Submit an Idea</button>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div onclick="showScreen('tracking-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                                    <p class="font-semibold text-sm">Track Ideas</p>
+                                </div>
+                                <div onclick="showScreen('rewards-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg>
+                                    <p class="font-semibold text-sm">Redeem Rewards</p>
+                                </div>
+                                <div onclick="showScreen('knowledge-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
+                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                                    <p class="font-semibold text-sm">Knowledge Bank</p>
+                                </div>
+                                <div onclick="showScreen('chatbot-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
+                                    <img src="Innobot.PNG" alt="Innobot Logo" class="h-8 w-8 mx-auto mb-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/40x40/ffffff/dc2626?text=Bot';">
+                                    <p class="font-semibold text-sm">Inno Chatbot</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Screen: Idea Submission -->
+                        <div id="submission-screen" class="screen p-4 hidden">
+                            <header class="flex items-center mb-6">
+                                <button onclick="showScreen('home-screen')" class="p-2 rounded-full hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                                </button>
+                                <h1 class="text-xl font-bold text-gray-800 ml-2">Submit an Idea</h1>
+                            </header>
+                            <form id="idea-form" class="space-y-4">
+                                <div>
+                                    <label for="idea-title" class="block text-sm font-medium text-gray-700 mb-1">Idea Title</label>
+                                    <input type="text" id="idea-title" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" placeholder="e.g., Gamified Onboarding">
+                                </div>
+                                <div>
+                                    <label for="idea-description" class="block text-sm font-medium text-gray-700 mb-1">Detailed Description</label>
+                                    <textarea id="idea-description" rows="5" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" placeholder="Describe your idea clearly..."></textarea>
+                                </div>
+                                <div>
+                                    <label for="idea-category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                                    <select id="idea-category" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500">
+                                        <option>Product Improvement</option>
+                                        <option>New Feature</option>
+                                        <option>Cost Saving</option>
+                                        <option>Process Optimization</option>
+                                    </select>
+                                </div>
+                                <div class="pt-4">
+                                    <button type="submit" class="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-red-700 transition">Submit Idea</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Screen: Idea Tracking -->
+                        <div id="tracking-screen" class="screen hidden">
+                           <header class="flex items-center mb-4 p-4">
+                                <button onclick="showScreen('home-screen')" class="p-2 rounded-full hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                                </button>
+                                <h1 class="text-xl font-bold text-gray-800 ml-2">My Ideas</h1>
+                            </header>
+                            <div class="px-4 mobile-screen-content h-[calc(100%-68px)] overflow-y-auto">
+                                <div id="idea-list" class="space-y-4">
+                                    <!-- Dynamic content will be injected here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Screen: Rewards -->
+                        <div id="rewards-screen" class="screen hidden">
+                             <header class="flex items-center mb-4 p-4">
+                                <button onclick="showScreen('home-screen')" class="p-2 rounded-full hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                                </button>
+                                <h1 class="text-xl font-bold text-gray-800 ml-2">Redeem Rewards</h1>
+                            </header>
+                            <div class="px-4 mobile-screen-content h-[calc(100%-68px)] overflow-y-auto">
+                                <div class="bg-green-500 text-white p-4 rounded-xl mb-6 text-center">
+                                    <p class="text-sm opacity-90">Your Balance</p>
+                                    <div class="flex items-center justify-center space-x-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                                        <span id="star-balance-rewards" class="font-bold text-3xl">1,250</span>
+                                    </div>
+                                </div>
+                                <div id="rewards-list" class="grid grid-cols-2 gap-4">
+                                     <!-- Dynamic content will be injected here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Screen: Knowledge Bank -->
+                        <div id="knowledge-screen" class="screen hidden">
+                            <header class="flex items-center mb-4 p-4">
+                                <button onclick="showScreen('home-screen')" class="p-2 rounded-full hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                                </button>
+                                <h1 class="text-xl font-bold text-gray-800 ml-2">Knowledge Bank</h1>
+                            </header>
+                            <div class="px-4 mobile-screen-content h-[calc(100%-68px)] overflow-y-auto">
+                                <div class="relative mb-4">
+                                    <input type="text" class="w-full pl-10 pr-4 py-2 border rounded-full bg-gray-100" placeholder="Search articles...">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                                </div>
+                                <div id="knowledge-list" class="space-y-4">
+                                    <!-- Dynamic content will be injected here -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Screen: Chatbot -->
+                        <div id="chatbot-screen" class="screen hidden flex flex-col h-full">
+                            <header class="flex items-center p-4 border-b">
+                                <button onclick="showScreen('home-screen')" class="p-2 rounded-full hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                                </button>
+                                <img src="https://placehold.co/40x40/ffffff/dc2626?text=Bot" alt="Innobot Logo" class="h-10 w-10 ml-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/40x40/ffffff/dc2626?text=Bot';">
+                                <div class="ml-3">
+                                    <h1 class="text-xl font-bold text-gray-800">Inno Chatbot</h1>
+                                    <p class="text-xs text-green-500 font-semibold">● Online</p>
+                                </div>
+                            </header>
+                            <div class="flex-grow p-4 space-y-4 overflow-y-auto mobile-screen-content">
+                                <!-- Chat messages here -->
+                                <div class="flex justify-start">
+                                    <div class="bg-gray-200 text-gray-800 p-3 rounded-lg max-w-xs">
+                                        <p>Hello! I'm the InnoBot. How can I help you with your innovation journey today?</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div class="bg-red-500 text-white p-3 rounded-lg max-w-xs">
+                                        <p>How do I submit a new idea?</p>
+                                    </div>
+                                </div>
+                                 <div class="flex justify-start">
+                                    <div class="bg-gray-200 text-gray-800 p-3 rounded-lg max-w-xs">
+                                        <p>Great question! You can submit an idea through the "Inno" mini-app. Just tap the "Submit an Idea" button on the main screen.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer class="p-4 border-t">
+                                <div class="flex items-center bg-gray-100 rounded-full">
+                                    <input type="text" class="flex-grow bg-transparent px-4 py-2 focus:outline-none" placeholder="Type a message...">
+                                    <button class="p-3 text-red-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
+                                    </button>
+                                </div>
+                            </footer>
+                        </div>
+
+
+                    </main>
+
+                    <!-- Bottom Navigation Bar -->
+                    <footer class="mobile-nav-footer flex-shrink-0 w-full bg-white rounded-b-[24px] border-t z-10">
+                        <div class="flex justify-around items-center h-16">
+                             <button onclick="showScreen('super-app-home-screen')" class="p-3 rounded-full text-gray-600 hover:bg-red-50 hover:text-red-600 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                             </button>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for notifications -->
+    <div id="notification-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 shadow-xl text-center max-w-sm mx-4">
+            <div id="modal-icon-container" class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                 <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </div>
+            <h3 id="modal-title" class="text-lg font-medium text-gray-900">Success!</h3>
+            <p id="modal-message" class="text-sm text-gray-500 mt-2">Your idea has been submitted.</p>
+            <button onclick="closeModal()" class="mt-4 w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700">OK</button>
+        </div>
+    </div>
+
+
     <script>
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        // --- DATA ---
+        const appState = {
+            user: {
+                name: "Kim Evangelista",
+                stars: 1250
+            },
+            ideas: [
+                { id: 1, title: "AI-Powered Customer Support", description: "Integrate an AI chatbot to handle common customer queries, freeing up human agents for more complex issues.", category: "Process Optimization", status: "Approved", progress: 3, totalSteps: 3, starsAwarded: 500 },
+                { id: 2, title: "Eco-Friendly Packaging", description: "Switch to biodegradable materials for all product packaging to reduce our environmental footprint.", category: "Cost Saving", status: "In Review", progress: 2, totalSteps: 3 },
+                { id: 3, title: "Employee Wellness App", description: "Develop a mobile app for employees to track fitness goals, access mental health resources, and join wellness challenges.", category: "New Feature", status: "Rejected", progress: 1, totalSteps: 3 },
+                { id: 4, title: "Gamified Onboarding", description: "Make the new-hire onboarding process more engaging with points, badges, and leaderboards.", category: "Product Improvement", status: "Submitted", progress: 1, totalSteps: 3 },
+            ],
+            rewards: [
+                { id: 1, name: "Coffee Voucher", cost: 250, icon: '☕️' },
+                { id: 2, name: "₱500 GCash Credit", cost: 1000, icon: '💰' },
+                { id: 3, name: "Company Hoodie", cost: 1500, icon: '👕' },
+                { id: 4, name: "1 Day Extra Leave", cost: 5000, icon: '🌴' },
+            ],
+            knowledge: [
+                { id: 1, title: "Success Story: The AI Chatbot", content: "Learn how the AI chatbot idea went from submission to a successful launch, saving over 200 man-hours per week." },
+                { id: 2, title: "Guide: How to Write a Winning Idea", content: "Follow these simple steps to make your idea submission clear, concise, and compelling to the review committee." },
+                { id: 3, title: "Innovation at InnoCorp", content: "A deep dive into the culture of innovation that drives our company forward and how you can be a part of it." },
+            ]
+        };
+
+        // --- UI RENDERING & ANIMATION FUNCTIONS ---
+
+        function renderAll() {
+            renderStarBalance();
+            renderIdeaList();
+            renderRewardsList();
+            renderKnowledgeList();
+        }
+        
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function renderStarBalance(oldValue, newValue) {
+            const homeEl = document.getElementById('star-balance-home');
+            const rewardsEl = document.getElementById('star-balance-rewards');
+            animateValue(homeEl, oldValue, newValue, 500);
+            animateValue(rewardsEl, oldValue, newValue, 500);
+        }
+        
+        function renderIdeaList() {
+            const listEl = document.getElementById('idea-list');
+            listEl.innerHTML = ''; // Clear existing list
+            const progressLabels = ['Submitted', 'In Review', 'Approved'];
+
+            appState.ideas.sort((a,b) => b.id - a.id).forEach(idea => {
+                let statusText = idea.status;
+                let progressPercentage = (idea.progress / idea.totalSteps) * 100;
+                let progressBarFillClass = 'progress-bar-fill';
+                
+                if (idea.status === 'Approved') {
+                    statusText = `Approved (+${idea.starsAwarded} Stars)`;
+                } else if (idea.status === 'Rejected') {
+                    progressPercentage = 100;
+                    progressBarFillClass = 'progress-bar-rejected';
+                }
+
+                const ideaCard = `
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm interactive-card">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-gray-800 w-2/3">${idea.title}</h3>
+                            <span class="text-xs font-semibold text-gray-600 text-right">${statusText}</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2 mb-4">${idea.description}</p>
+                        <div class="mt-3">
+                            <div class="progress-bar">
+                                <div class="${progressBarFillClass}" style="width: 0%;" data-width="${progressPercentage}"></div>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                ${progressLabels.map((label, index) => {
+                                    const isCompleted = idea.status === 'Rejected' ? (index < idea.progress) : (index < idea.progress);
+                                    const isRejectedStep = idea.status === 'Rejected' && (index + 1 === idea.progress);
+                                    let textColor = 'text-gray-400';
+                                    if(isCompleted) textColor = 'text-red-600 font-semibold';
+                                    if(isRejectedStep) textColor = 'text-gray-600 font-semibold';
+                                    return `<span class="${textColor}">${isRejectedStep ? 'Rejected' : label}</span>`;
+                                }).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                listEl.insertAdjacentHTML('beforeend', ideaCard);
+            });
+            // Animate progress bars on render
+            document.querySelectorAll('.progress-bar-fill').forEach(bar => {
+                setTimeout(() => {
+                   bar.style.width = bar.dataset.width + '%';
+                }, 100);
+            });
+        }
+
+        function renderRewardsList() {
+            const listEl = document.getElementById('rewards-list');
+            listEl.innerHTML = '';
+            appState.rewards.forEach(reward => {
+                const canAfford = appState.user.stars >= reward.cost;
+                const buttonClass = canAfford ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-300 cursor-not-allowed';
+                const buttonDisabled = canAfford ? '' : 'disabled';
+
+                const rewardCard = `
+                    <div class="bg-white p-3 rounded-lg border border-gray-200 text-center shadow-sm flex flex-col justify-between interactive-card">
+                        <div>
+                           <div class="text-4xl mb-2">${reward.icon}</div>
+                           <p class="font-semibold text-sm text-gray-800">${reward.name}</p>
+                           <div class="flex items-center justify-center space-x-1 my-2 text-yellow-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                                <span class="font-bold text-sm">${reward.cost.toLocaleString()}</span>
+                           </div>
+                        </div>
+                        <button onclick="redeemReward(${reward.id})" class="w-full text-white text-xs font-bold py-2 rounded-md transition ${buttonClass}" ${buttonDisabled}>Redeem</button>
+                    </div>
+                `;
+                listEl.innerHTML += rewardCard;
+            });
+        }
+        
+        function renderKnowledgeList() {
+            const listEl = document.getElementById('knowledge-list');
+            listEl.innerHTML = '';
+            appState.knowledge.forEach(item => {
+                const articleCard = `
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm interactive-card cursor-pointer">
+                        <h3 class="font-bold text-gray-800 mb-1">${item.title}</h3>
+                        <p class="text-sm text-gray-600">${item.content}</p>
+                    </div>
+                `;
+                listEl.innerHTML += articleCard;
+            });
+        }
+
+        // --- NAVIGATION & INTERACTIONS ---
+        let currentScreen = 'super-app-home-screen';
+        function showScreen(screenId) {
+            const oldScreen = document.getElementById(currentScreen);
+            const newScreen = document.getElementById(screenId);
+            
+            if (oldScreen && newScreen && oldScreen !== newScreen) {
+                oldScreen.classList.add('exiting');
+                oldScreen.classList.remove('active');
+                
+                newScreen.classList.remove('hidden', 'exiting');
+                newScreen.classList.add('active');
+                
+                // Re-render lists that might need animated progress bars
+                if (screenId === 'tracking-screen') {
+                    renderIdeaList();
+                }
+                
+                setTimeout(() => {
+                    oldScreen.classList.add('hidden');
+                }, 400);
+            }
+            currentScreen = screenId;
+        }
+
+        document.getElementById('idea-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('idea-title').value;
+            const description = document.getElementById('idea-description').value;
+            const category = document.getElementById('idea-category').value;
+
+            if (!title || !description) {
+                showModal('Error', 'Please fill in all fields.', 'error');
+                return;
+            }
+
+            const newIdea = {
+                id: appState.ideas.length + 1,
+                title,
+                description,
+                category,
+                status: 'Submitted',
+                progress: 1,
+                totalSteps: 3
+            };
+            appState.ideas.push(newIdea);
+            
+            this.reset();
+            showModal('Success!', 'Your idea has been submitted for review.');
+            setTimeout(() => {
+                closeModal();
+                showScreen('tracking-screen');
+            }, 1500);
+        });
+        
+        function redeemReward(rewardId) {
+            const reward = appState.rewards.find(r => r.id === rewardId);
+            if (appState.user.stars >= reward.cost) {
+                const oldStars = appState.user.stars;
+                appState.user.stars -= reward.cost;
+                renderStarBalance(oldStars, appState.user.stars);
+                renderRewardsList(); // Re-render to update button states
+                showModal('Redeemed!', `You have successfully redeemed the ${reward.name}.`);
+            } else {
+                showModal('Oops!', 'You do not have enough stars for this reward.', 'error');
+            }
+        }
+        
+        function showModal(title, message, type = 'success') {
+            const modal = document.getElementById('notification-modal');
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-message').textContent = message;
+            
+            const iconContainer = document.getElementById('modal-icon-container');
+            if (type === 'error') {
+                iconContainer.className = 'mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4';
+                iconContainer.innerHTML = `<svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>`;
+            } else {
+                iconContainer.className = 'mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4';
+                iconContainer.innerHTML = `<svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>`;
+            }
+            
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('notification-modal').classList.add('hidden');
+        }
+
+        // --- INITIALIZATION ---
+        window.onload = function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => preloader.style.display = 'none', 500);
+            }, 1000);
+
+            const welcomeHeader = document.querySelector('#home-screen h1');
+            if(welcomeHeader) {
+                welcomeHeader.textContent = appState.user.name;
+            }
+
+            renderAll();
+            // Set initial star balance without animation
+            document.getElementById('star-balance-home').textContent = appState.user.stars.toLocaleString();
+            document.getElementById('star-balance-rewards').textContent = appState.user.stars.toLocaleString();
+        };
     </script>
 </body>
 </html>
