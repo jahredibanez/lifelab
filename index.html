@@ -185,7 +185,7 @@
                         <!-- Screen: Super App Home -->
                         <div id="super-app-home-screen" class="screen p-4 active">
                              <header class="text-center mb-6">
-                                <img src="lifelablogo.png" alt="LifeLab Logo" class="mx-auto h-12" onerror="this.onerror=null;this.src='https://placehold.co/150x50/ffffff/dc2626?text=LifeLab';">
+                                <h1 class="text-3xl font-bold text-gray-800">PC Super App</h1>
                                 <p class="text-gray-500 mt-2">Your all-in-one portal</p>
                             </header>
                             <div class="space-y-3">
@@ -205,8 +205,8 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
                                     </div>
                                     <div>
-                                        <p class="font-bold text-gray-800">File MCP</p>
-                                        <p class="text-sm text-gray-500">Monthly Complementary Products</p>
+                                        <p class="font-bold text-gray-800">Monthly Complementary Products</p>
+                                        <p class="text-sm text-gray-500">Claim your monthly benefits</p>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-4 bg-gray-100 p-4 rounded-xl cursor-not-allowed opacity-60 interactive-card">
@@ -223,16 +223,17 @@
 
                         <!-- Screen: Inno Home -->
                         <div id="home-screen" class="screen p-4 hidden">
-                            <header class="flex justify-between items-center mb-6">
-                                <div>
-                                    <p class="text-gray-500 text-sm">Welcome back,</p>
-                                    <h1 class="text-2xl font-bold text-gray-800">Kim Evangelista</h1>
-                                </div>
+                            <header class="flex justify-between items-center mb-4">
+                                <img src="lifelab.png" alt="LifeLab Logo" class="h-8" onerror="this.onerror=null;this.src='https://placehold.co/120x40/ffffff/dc2626?text=LifeLab';">
                                 <div class="flex items-center space-x-2 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                                    <span id="star-balance-home" class="font-bold text-lg">1,250</span>
+                                    <span id="star-balance-home" class="font-bold text-lg">1000 Stars</span>
                                 </div>
                             </header>
+                             <div class="mb-6">
+                                <p class="text-gray-500 text-sm">Welcome back,</p>
+                                <h1 class="text-2xl font-bold text-gray-800">Kim Evangelista</h1>
+                            </div>
 
                             <div class="bg-red-600 text-white p-5 rounded-xl mb-6 text-center shadow-lg interactive-card">
                                 <h2 class="text-lg font-semibold mb-2">Have a brilliant idea?</h2>
@@ -249,13 +250,17 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg>
                                     <p class="font-semibold text-sm">Redeem Rewards</p>
                                 </div>
+                                <div onclick="showScreen('leaderboard-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                    <p class="font-semibold text-sm">Leaderboard</p>
+                                </div>
                                 <div onclick="showScreen('knowledge-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                                     <p class="font-semibold text-sm">Knowledge Bank</p>
                                 </div>
-                                <div onclick="showScreen('chatbot-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
-                                    <img src="Innobot.PNG" alt="Innobot Logo" class="h-8 w-8 mx-auto mb-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/40x40/ffffff/dc2626?text=Bot';">
-                                    <p class="font-semibold text-sm">Inno Chatbot</p>
+                                <div onclick="showScreen('chatbot-screen')" class="bg-gray-100 col-span-2 p-4 rounded-xl text-center cursor-pointer interactive-card flex items-center justify-center space-x-3">
+                                    <img src="Innobot.PNG" alt="Innobot Logo" class="h-8 w-8 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/40x40/ffffff/dc2626?text=Bot';">
+                                    <p class="font-semibold text-sm">Ask Inno Chatbot</p>
                                 </div>
                             </div>
                         </div>
@@ -307,6 +312,21 @@
                             </div>
                         </div>
 
+                        <!-- Screen: Leaderboard -->
+                        <div id="leaderboard-screen" class="screen hidden">
+                           <header class="flex items-center mb-4 p-4">
+                                <button onclick="showScreen('home-screen')" class="p-2 rounded-full hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                                </button>
+                                <h1 class="text-xl font-bold text-gray-800 ml-2">Top Innovators</h1>
+                            </header>
+                            <div class="px-4 mobile-screen-content h-[calc(100%-68px)] overflow-y-auto">
+                                <div id="leaderboard-list" class="space-y-3">
+                                    <!-- Dynamic content will be injected here -->
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Screen: Rewards -->
                         <div id="rewards-screen" class="screen hidden">
                              <header class="flex items-center mb-4 p-4">
@@ -320,7 +340,7 @@
                                     <p class="text-sm opacity-90">Your Balance</p>
                                     <div class="flex items-center justify-center space-x-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                                        <span id="star-balance-rewards" class="font-bold text-3xl">1,250</span>
+                                        <span id="star-balance-rewards" class="font-bold text-3xl">1000</span>
                                     </div>
                                 </div>
                                 <div id="rewards-list" class="grid grid-cols-2 gap-4">
@@ -354,7 +374,7 @@
                                 <button onclick="showScreen('home-screen')" class="p-2 rounded-full hover:bg-gray-100">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                                 </button>
-                                <img src="https://placehold.co/40x40/ffffff/dc2626?text=Bot" alt="Innobot Logo" class="h-10 w-10 ml-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/40x40/ffffff/dc2626?text=Bot';">
+                                <img src="Innobot.PNG" alt="Innobot Logo" class="h-10 w-10 ml-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/40x40/ffffff/dc2626?text=Bot';">
                                 <div class="ml-3">
                                     <h1 class="text-xl font-bold text-gray-800">Inno Chatbot</h1>
                                     <p class="text-xs text-green-500 font-semibold">● Online</p>
@@ -422,13 +442,20 @@
         const appState = {
             user: {
                 name: "Kim Evangelista",
-                stars: 1250
+                stars: 1000
             },
             ideas: [
                 { id: 1, title: "AI-Powered Customer Support", description: "Integrate an AI chatbot to handle common customer queries, freeing up human agents for more complex issues.", category: "Process Optimization", status: "Approved", progress: 3, totalSteps: 3, starsAwarded: 500 },
                 { id: 2, title: "Eco-Friendly Packaging", description: "Switch to biodegradable materials for all product packaging to reduce our environmental footprint.", category: "Cost Saving", status: "In Review", progress: 2, totalSteps: 3 },
                 { id: 3, title: "Employee Wellness App", description: "Develop a mobile app for employees to track fitness goals, access mental health resources, and join wellness challenges.", category: "New Feature", status: "Rejected", progress: 1, totalSteps: 3 },
                 { id: 4, title: "Gamified Onboarding", description: "Make the new-hire onboarding process more engaging with points, badges, and leaderboards.", category: "Product Improvement", status: "Submitted", progress: 1, totalSteps: 3 },
+            ],
+            leaderboard: [
+                { rank: 1, name: 'Kim', stars: 5250, medal: '🥇' },
+                { rank: 2, name: 'Kevin', stars: 4800, medal: '🥈' },
+                { rank: 3, name: 'Trish', stars: 4750, medal: '🥉' },
+                { rank: 4, name: 'Alex', stars: 3200, medal: '' },
+                { rank: 5, name: 'Sam', stars: 2100, medal: '' },
             ],
             rewards: [
                 { id: 1, name: "Coffee Voucher", cost: 250, icon: '☕️' },
@@ -450,6 +477,7 @@
             renderIdeaList();
             renderRewardsList();
             renderKnowledgeList();
+            renderLeaderboard();
         }
         
         function animateValue(obj, start, end, duration) {
@@ -457,7 +485,7 @@
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString() + ' Stars';
                 if (progress < 1) {
                     window.requestAnimationFrame(step);
                 }
@@ -465,11 +493,11 @@
             window.requestAnimationFrame(step);
         }
 
-        function renderStarBalance(oldValue, newValue) {
+        function renderStarBalance(oldValue = appState.user.stars, newValue = appState.user.stars) {
             const homeEl = document.getElementById('star-balance-home');
             const rewardsEl = document.getElementById('star-balance-rewards');
             animateValue(homeEl, oldValue, newValue, 500);
-            animateValue(rewardsEl, oldValue, newValue, 500);
+            rewardsEl.textContent = newValue.toLocaleString();
         }
         
         function renderIdeaList() {
@@ -520,6 +548,30 @@
                 setTimeout(() => {
                    bar.style.width = bar.dataset.width + '%';
                 }, 100);
+            });
+        }
+
+        function renderLeaderboard() {
+            const listEl = document.getElementById('leaderboard-list');
+            listEl.innerHTML = '';
+            appState.leaderboard.forEach(person => {
+                const isUser = person.name.toLowerCase() === appState.user.name.split(' ')[0].toLowerCase();
+                const cardBg = isUser ? 'bg-red-100 border-red-500' : 'bg-white';
+                const rankColor = person.rank <= 3 ? 'text-red-600 font-bold' : 'text-gray-500';
+
+                const personCard = `
+                    <div class="flex items-center p-3 rounded-lg border ${cardBg} interactive-card">
+                        <div class="w-10 text-center ${rankColor} text-xl">${person.medal || person.rank}</div>
+                        <div class="flex-grow ml-4">
+                            <p class="font-bold text-gray-800">${person.name}</p>
+                        </div>
+                        <div class="flex items-center space-x-1 text-yellow-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                            <span class="font-bold text-sm">${person.stars.toLocaleString()}</span>
+                        </div>
+                    </div>
+                `;
+                listEl.innerHTML += personCard;
             });
         }
 
@@ -575,9 +627,10 @@
                 newScreen.classList.remove('hidden', 'exiting');
                 newScreen.classList.add('active');
                 
-                // Re-render lists that might need animated progress bars
                 if (screenId === 'tracking-screen') {
                     renderIdeaList();
+                } else if (screenId === 'leaderboard-screen') {
+                    renderLeaderboard();
                 }
                 
                 setTimeout(() => {
@@ -666,7 +719,7 @@
 
             renderAll();
             // Set initial star balance without animation
-            document.getElementById('star-balance-home').textContent = appState.user.stars.toLocaleString();
+            document.getElementById('star-balance-home').textContent = appState.user.stars.toLocaleString() + ' Stars';
             document.getElementById('star-balance-rewards').textContent = appState.user.stars.toLocaleString();
         };
     </script>
