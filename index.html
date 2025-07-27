@@ -6,6 +6,7 @@
     <title>Inno - Mini App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -96,6 +97,34 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #9ca3af;
+            animation: typing 1s infinite;
+        }
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        /* Styles for Gemini response formatting */
+        .gemini-response ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+        .gemini-response li {
+            margin-bottom: 4px;
+        }
 
     </style>
 </head>
@@ -157,7 +186,7 @@
                         <button onclick="showScreen('super-app-home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
-                        <img src="lifelablogo.png" alt="LifeLab Logo" class="h-8" onerror="this.onerror=null;this.src='https://placehold.co/120x40/ffffff/dc2626?text=LifeLab';">
+                        <img src="lifelablogo.png" alt="LifeLab Logo" class="h-8">
                         <div class="flex items-center space-x-2 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                             <span id="star-balance-home" class="font-bold text-lg">1000 Stars</span>
@@ -195,8 +224,8 @@
                              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                             <p class="font-semibold text-sm">Knowledge Bank</p>
                         </div>
-                        <div onclick="showScreen('chatbot-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card flex items-center justify-center space-x-3">
-                            <img src="Innobot.PNG" alt="Innobot Logo" class="h-8 w-8 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/40x40/ffffff/dc2626?text=Bot';">
+                        <div onclick="openChatbot()" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card flex items-center justify-center space-x-3">
+                            <img src="Innobot.PNG" alt="Innobot Logo" class="h-8 w-8 rounded-full">
                             <p class="font-semibold text-sm">Ask InnoBot</p>
                         </div>
                     </div>
@@ -349,43 +378,32 @@
                     </div>
                 </div>
                 
-                <!-- Screen: Chatbot -->
+                <!-- Screen: Gemini Chatbot -->
                 <div id="chatbot-screen" class="screen hidden flex flex-col h-full pt-0">
                     <header class="flex-shrink-0 flex items-center p-4 border-b pt-8">
                         <button onclick="showScreen('home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
-                        <img src="Innobot.PNG" alt="Innobot Logo" class="h-10 w-10 ml-2 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/40x40/ffffff/dc2626?text=Bot';">
+                         <img src="Innobot.PNG" alt="Innobot Logo" class="h-10 w-10 ml-2 rounded-full">
                         <div class="ml-3">
-                            <h1 class="text-xl font-bold text-gray-800">Inno Chatbot</h1>
-                            <p class="text-xs text-green-500 font-semibold">● Online</p>
+                            <h1 class="text-xl font-bold text-gray-800">InnoBot</h1>
+                            <p class="text-xs text-green-500 font-semibold">● Powered by Gemini</p>
                         </div>
                     </header>
-                    <div class="flex-grow p-4 space-y-4 overflow-y-auto mobile-screen-content">
-                        <!-- Chat messages here -->
+                    <div id="gemini-chat-messages" class="flex-grow p-4 space-y-4 overflow-y-auto mobile-screen-content">
                         <div class="flex justify-start">
                             <div class="bg-gray-200 text-gray-800 p-3 rounded-lg max-w-xs">
-                                <p>Hello! I'm the InnoBot. How can I help you with your innovation journey today?</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-end">
-                            <div class="bg-gradient-to-br from-red-500 to-red-700 text-white p-3 rounded-lg max-w-xs">
-                                <p>How do I submit a new idea?</p>
-                            </div>
-                        </div>
-                         <div class="flex justify-start">
-                            <div class="bg-gray-200 text-gray-800 p-3 rounded-lg max-w-xs">
-                                <p>Great question! You can submit an idea through the "Inno" mini-app. Just tap the "Submit an Idea" button on the main screen.</p>
+                                <p>Hello! I'm the Gemini-powered InnoBot. Ask me anything about innovation, brainstorming, or your ideas!</p>
                             </div>
                         </div>
                     </div>
                     <footer class="p-4 border-t flex-shrink-0">
-                        <div class="flex items-center bg-gray-100 rounded-full">
-                            <input type="text" class="flex-grow bg-transparent px-4 py-2 focus:outline-none" placeholder="Type a message...">
-                            <button class="p-3 text-red-500">
+                        <form id="gemini-prompt-form" class="flex items-center bg-gray-100 rounded-full">
+                            <input type="text" id="gemini-prompt-input" class="flex-grow bg-transparent px-4 py-2 focus:outline-none" placeholder="Ask Gemini...">
+                            <button type="submit" class="p-3 text-red-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
                             </button>
-                        </div>
+                        </form>
                     </footer>
                 </div>
 
@@ -412,6 +430,20 @@
             <h3 id="modal-title" class="text-lg font-medium text-gray-900">Success!</h3>
             <p id="modal-message" class="text-sm text-gray-500 mt-2">Your idea has been submitted.</p>
             <button onclick="closeModal()" class="mt-4 w-full bg-gradient-to-br from-red-500 to-red-700 text-white py-2 rounded-md hover:shadow-lg">OK</button>
+        </div>
+    </div>
+    
+    <!-- API Key Modal -->
+    <div id="api-key-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 shadow-xl max-w-sm mx-4">
+            <h3 class="text-lg font-medium text-gray-900">Enter Gemini API Key</h3>
+            <p class="text-sm text-gray-500 mt-2">To use the AI chatbot, please provide your Gemini API key. You can get one from Google AI Studio.</p>
+            <input type="password" id="api-key-input" class="w-full mt-4 px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" placeholder="Paste your API key here">
+            <p id="api-key-error" class="text-red-500 text-xs mt-1 hidden">Please enter a valid API key.</p>
+            <div class="mt-4 flex justify-end space-x-2">
+                <button onclick="closeApiKeyModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Cancel</button>
+                <button onclick="saveApiKey()" class="px-4 py-2 bg-gradient-to-br from-red-500 to-red-700 text-white rounded-md hover:shadow-lg">Save & Continue</button>
+            </div>
         </div>
     </div>
 
@@ -747,6 +779,133 @@
 
         function closeModal() {
             document.getElementById('notification-modal').classList.add('hidden');
+        }
+
+        // --- Gemini Chatbot Logic ---
+        const geminiForm = document.getElementById('gemini-prompt-form');
+        const geminiInput = document.getElementById('gemini-prompt-input');
+        const geminiChatMessages = document.getElementById('gemini-chat-messages');
+        const geminiSubmitButton = geminiForm.querySelector('button');
+        let chatHistory = [];
+        let geminiApiKey = '';
+
+        function openChatbot() {
+            if (!geminiApiKey) {
+                document.getElementById('api-key-modal').classList.remove('hidden');
+            } else {
+                showScreen('chatbot-screen');
+            }
+        }
+
+        function closeApiKeyModal() {
+            document.getElementById('api-key-modal').classList.add('hidden');
+        }
+
+        function saveApiKey() {
+            const keyInput = document.getElementById('api-key-input');
+            const errorEl = document.getElementById('api-key-error');
+            const key = keyInput.value.trim();
+            if (key) {
+                geminiApiKey = key;
+                errorEl.classList.add('hidden');
+                closeApiKeyModal();
+                showScreen('chatbot-screen');
+            } else {
+                errorEl.classList.remove('hidden');
+            }
+        }
+
+        geminiForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const prompt = geminiInput.value.trim();
+            if (!prompt) return;
+
+            geminiInput.disabled = true;
+            geminiSubmitButton.disabled = true;
+
+            addMessageToChat(prompt, 'user');
+            geminiInput.value = '';
+            addTypingIndicator();
+
+            try {
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiApiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error.message || `API request failed with status ${response.status}`);
+                }
+
+                const result = await response.json();
+                removeTypingIndicator();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    addMessageToChat(text, 'gemini');
+                    chatHistory.push({ role: "model", parts: [{ text: text }] });
+                } else {
+                    addMessageToChat("I'm sorry, I couldn't generate a response. Please try again.", 'gemini');
+                }
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                removeTypingIndicator();
+                addMessageToChat(`There was an error: ${error.message}. Please check your API key and try again.`, 'gemini');
+            } finally {
+                geminiInput.disabled = false;
+                geminiSubmitButton.disabled = false;
+                geminiInput.focus();
+            }
+        });
+
+        function addMessageToChat(text, role) {
+            const messageWrapper = document.createElement('div');
+            const messageBubble = document.createElement('div');
+            messageBubble.classList.add('p-3', 'rounded-lg', 'max-w-xs');
+            
+            if (role === 'user') {
+                messageWrapper.classList.add('flex', 'justify-end');
+                messageBubble.classList.add('bg-gradient-to-br', 'from-red-500', 'to-red-700', 'text-white');
+                messageBubble.textContent = text;
+            } else {
+                messageWrapper.classList.add('flex', 'justify-start');
+                messageBubble.classList.add('bg-gray-200', 'text-gray-800', 'gemini-response');
+                messageBubble.innerHTML = marked.parse(text);
+            }
+            
+            messageWrapper.appendChild(messageBubble);
+            geminiChatMessages.appendChild(messageWrapper);
+            geminiChatMessages.scrollTop = geminiChatMessages.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const indicatorWrapper = document.createElement('div');
+            indicatorWrapper.id = 'typing-indicator';
+            indicatorWrapper.classList.add('flex', 'justify-start');
+            indicatorWrapper.innerHTML = `
+                <div class="bg-gray-200 text-gray-800 p-3 rounded-lg max-w-xs">
+                    <div class="typing-indicator">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            `;
+            geminiChatMessages.appendChild(indicatorWrapper);
+            geminiChatMessages.scrollTop = geminiChatMessages.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) {
+                indicator.remove();
+            }
         }
 
         // --- INITIALIZATION ---
