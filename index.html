@@ -125,6 +125,12 @@
         .gemini-response li {
             margin-bottom: 4px;
         }
+        
+        .admin-tab.active {
+            border-bottom-color: #dc2626;
+            color: #dc2626;
+            font-weight: 600;
+        }
 
     </style>
 </head>
@@ -135,49 +141,49 @@
     </div>
 
     <!-- Mobile App Frame -->
-    <div class="w-full max-w-[400px] h-full md:h-[90vh] md:max-h-[800px] md:rounded-[40px] bg-black md:shadow-lg md:border-4 md:border-gray-600">
-        <div class="w-full h-full bg-white md:rounded-[24px] overflow-hidden relative flex flex-col">
+    <div id="mobile-app-frame" class="w-full max-w-[400px] h-full md:h-[90vh] md:max-h-[800px] md:rounded-[40px] bg-black md:shadow-lg md:border-4 md:border-gray-600">
+        <div class="w-full h-full bg-white md:rounded-[36px] overflow-hidden relative flex flex-col">
             
             <!-- App Screens Container -->
             <main id="app-container" class="flex-grow relative overflow-hidden">
                 
                 <!-- Screen: Super App Home -->
                 <div id="super-app-home-screen" class="screen p-4 active overflow-y-auto">
-                     <header class="text-center mb-6">
-                        <h1 class="text-3xl font-bold text-gray-800">PC Super App</h1>
-                        <p class="text-gray-500 mt-2">Your all-in-one portal</p>
-                    </header>
-                    <div class="space-y-3 pb-20">
-                        <h2 class="text-sm font-semibold text-gray-600 px-2">Mini Apps</h2>
-                        <div onclick="showScreen('home-screen')" class="flex items-center space-x-4 bg-gray-100 p-4 rounded-xl cursor-pointer interactive-card">
-                            <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                        <header class="text-center mb-6">
+                            <h1 class="text-3xl font-bold text-gray-800">PC Super App</h1>
+                            <p class="text-gray-500 mt-2">Your all-in-one portal</p>
+                        </header>
+                        <div class="space-y-3 pb-20">
+                            <h2 class="text-sm font-semibold text-gray-600 px-2">Mini Apps</h2>
+                            <div onclick="showScreen('home-screen')" class="flex items-center space-x-4 bg-gray-100 p-4 rounded-xl cursor-pointer interactive-card">
+                                <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-800">Inno</p>
+                                    <p class="text-sm text-gray-500">Submit and track ideas</p>
+                                </div>
                             </div>
-                            <div>
-                                <p class="font-bold text-gray-800">Inno</p>
-                                <p class="text-sm text-gray-500">Submit and track ideas</p>
+                            <!-- Placeholder Apps -->
+                            <div class="flex items-center space-x-4 bg-gray-100 p-4 rounded-xl cursor-not-allowed opacity-60 interactive-card">
+                                <div class="w-12 h-12 bg-gray-400 rounded-lg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-800">Monthly Complementary Products</p>
+                                    <p class="text-sm text-gray-500">Claim your monthly benefits</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 bg-gray-100 p-4 rounded-xl cursor-not-allowed opacity-60 interactive-card">
+                                <div class="w-12 h-12 bg-gray-400 rounded-lg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-800">Trainings</p>
+                                    <p class="text-sm text-gray-500">Access learning materials</p>
+                                </div>
                             </div>
                         </div>
-                        <!-- Placeholder Apps -->
-                        <div class="flex items-center space-x-4 bg-gray-100 p-4 rounded-xl cursor-not-allowed opacity-60 interactive-card">
-                            <div class="w-12 h-12 bg-gray-400 rounded-lg flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
-                            </div>
-                            <div>
-                                <p class="font-bold text-gray-800">Monthly Complementary Products</p>
-                                <p class="text-sm text-gray-500">Claim your monthly benefits</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4 bg-gray-100 p-4 rounded-xl cursor-not-allowed opacity-60 interactive-card">
-                            <div class="w-12 h-12 bg-gray-400 rounded-lg flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
-                            </div>
-                            <div>
-                                <p class="font-bold text-gray-800">Trainings</p>
-                                <p class="text-sm text-gray-500">Access learning materials</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Screen: Inno Home -->
@@ -186,15 +192,22 @@
                         <button onclick="showScreen('super-app-home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
-                        <img src="lifelablogo.png" alt="LifeLab Logo" class="h-8">
-                        <div class="flex items-center space-x-2 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                            <span id="star-balance-home" class="font-bold text-lg">1000 Stars</span>
+                        <div class="flex items-center space-x-4">
+                           <div id="notification-bell-container" class="relative">
+                               <button onclick="showScreen('notifications-screen')" class="p-2 rounded-full hover:bg-gray-100 text-gray-600">
+                                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                                   <span id="notification-dot" class="hidden absolute top-1 right-1 h-2.5 w-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+                               </button>
+                           </div>
+                           <div class="flex items-center space-x-2 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                               <span id="star-balance-home" class="font-bold text-lg">1000 Stars</span>
+                           </div>
                         </div>
                     </header>
                      <div class="mb-6">
                         <p class="text-gray-500 text-sm">Welcome back,</p>
-                        <h1 class="text-2xl font-bold text-gray-800">Isaac Galang</h1>
+                        <h1 class="text-2xl font-bold text-gray-800">Jahred Ibanez</h1>
                     </div>
 
                     <div class="bg-gradient-to-br from-red-500 to-red-700 text-white p-5 rounded-xl mb-6 text-center shadow-lg interactive-card">
@@ -212,6 +225,12 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
                             <p class="font-semibold text-sm">Track Ideas</p>
                         </div>
+                        <div onclick="showScreen('discover-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                            </svg>
+                            <p class="font-semibold text-sm">Discover Ideas</p>
+                        </div>
                         <div onclick="showScreen('rewards-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg>
                             <p class="font-semibold text-sm">Redeem Rewards</p>
@@ -224,9 +243,15 @@
                              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                             <p class="font-semibold text-sm">Knowledge Bank</p>
                         </div>
-                        <div onclick="openChatbot()" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card flex items-center justify-center space-x-3">
-                            <img src="Innobot.png" alt="Innobot Logo" class="h-8 w-8 rounded-full">
+                        <div onclick="openChatbot()" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
                             <p class="font-semibold text-sm">Ask InnoBot</p>
+                        </div>
+                        <div onclick="showAdminPortal()" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                            <p class="font-semibold text-sm">Admin Section</p>
                         </div>
                     </div>
                 </div>
@@ -258,6 +283,20 @@
                                     <option>Process Optimization</option>
                                 </select>
                             </div>
+                             <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Tags</label>
+                                <div id="existing-tags-container" class="flex flex-wrap gap-2 p-2 border border-gray-300 rounded-md">
+                                    <!-- Existing tags will be populated here -->
+                                </div>
+                            </div>
+                            <div>
+                                <label for="suggest-tags" class="block text-sm font-medium text-gray-700 mb-1">Suggest New Tags</label>
+                                <input type="text" id="suggest-tags" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" placeholder="e.g., QoL, marketing, mobile (comma-separated)">
+                            </div>
+                            <div>
+                                <label for="idea-attachments" class="block text-sm font-medium text-gray-700 mb-1">Attachments (Optional)</label>
+                                <input type="file" id="idea-attachments" multiple class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100"/>
+                            </div>
                             <div class="pt-4 pb-20">
                                 <button type="submit" class="w-full bg-gradient-to-br from-red-500 to-red-700 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition">Submit Idea</button>
                             </div>
@@ -275,6 +314,53 @@
                     </header>
                     <div class="px-4 pb-20 flex-grow mobile-screen-content overflow-y-auto">
                         <div id="idea-list" class="space-y-4">
+                            <!-- Dynamic content will be injected here -->
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Screen: Idea Details -->
+                <div id="idea-details-screen" class="screen hidden flex flex-col">
+                   <header class="flex-shrink-0 flex items-center mb-4 p-4">
+                        <button onclick="showScreen(appState.previousScreen || 'home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-800 ml-2">Idea Details</h1>
+                    </header>
+                    <div id="idea-details-content" class="px-4 pb-20 flex-grow mobile-screen-content overflow-y-auto">
+                        <!-- Idea details will be injected here -->
+                    </div>
+                </div>
+
+                <!-- Screen: Discover Ideas -->
+                <div id="discover-screen" class="screen hidden flex flex-col">
+                    <header class="flex-shrink-0 flex items-center mb-4 p-4">
+                        <button onclick="showScreen('home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-800 ml-2">Discover Ideas</h1>
+                    </header>
+                    <div class="px-4 flex-shrink-0">
+                        <div class="relative mb-2">
+                            <input type="text" id="idea-search-input" oninput="renderDiscoverIdeas()" class="w-full pl-10 pr-4 py-2 border rounded-full bg-gray-100" placeholder="Search by keyword...">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mb-4">
+                            <select id="idea-filter-category" onchange="renderDiscoverIdeas()" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 text-sm">
+                                <!-- Options will be populated by JS -->
+                            </select>
+                            <select id="idea-filter-status" onchange="renderDiscoverIdeas()" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 text-sm">
+                                <!-- Options will be populated by JS -->
+                            </select>
+                        </div>
+                         <div class="mb-4">
+                             <select id="idea-filter-tag" onchange="renderDiscoverIdeas()" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 text-sm">
+                                <!-- Options will be populated by JS -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-20 flex-grow mobile-screen-content overflow-y-auto">
+                        <div id="discover-idea-list" class="space-y-4">
                             <!-- Dynamic content will be injected here -->
                         </div>
                     </div>
@@ -306,9 +392,9 @@
                     <div class="px-4 pb-20 flex-grow mobile-screen-content overflow-y-auto space-y-6">
                         <div class="text-center">
                             <div class="w-24 h-24 rounded-full bg-gradient-to-br from-red-500 to-red-700 mx-auto flex items-center justify-center text-white text-4xl font-bold">
-                                IG
+                                JI
                             </div>
-                            <h2 class="text-2xl font-bold mt-4" id="profile-name">Isaac Galang</h2>
+                            <h2 class="text-2xl font-bold mt-4" id="profile-name">Jahred Ibanez</h2>
                             <p class="text-gray-500">Innovator</p>
                         </div>
 
@@ -378,13 +464,26 @@
                     </div>
                 </div>
                 
+                <!-- Screen: Notifications -->
+                <div id="notifications-screen" class="screen hidden flex flex-col">
+                    <header class="flex-shrink-0 flex items-center mb-4 p-4">
+                        <button onclick="showScreen('home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-800 ml-2">Notifications</h1>
+                    </header>
+                    <div id="notification-list" class="px-4 pb-20 flex-grow mobile-screen-content overflow-y-auto">
+                        <!-- Notifications will be injected here -->
+                    </div>
+                </div>
+
                 <!-- Screen: Gemini Chatbot -->
                 <div id="chatbot-screen" class="screen hidden flex flex-col h-full pt-0">
                     <header class="flex-shrink-0 flex items-center p-4 border-b pt-8">
                         <button onclick="showScreen('home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
-                         <img src="Innobot.png" alt="Innobot Logo" class="h-10 w-10 ml-2 rounded-full">
+                         <img src="https://ssl.gstatic.com/chat/ui/v1/bots/2/2.png" alt="Innobot Logo" class="h-10 w-10 ml-2 rounded-full">
                         <div class="ml-3">
                             <h1 class="text-xl font-bold text-gray-800">InnoBot</h1>
                             <p class="text-xs text-green-500 font-semibold">● Powered by Gemini</p>
@@ -421,6 +520,41 @@
         </div>
     </div>
     
+    <!-- Admin Web Portal View -->
+    <div id="admin-portal" class="hidden w-full h-full bg-gray-200 p-4 md:p-8 overflow-y-auto">
+        <header class="flex justify-between items-center mb-6 bg-white p-4 rounded-lg shadow-md">
+            <div>
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Admin Web Portal</h1>
+                <p class="text-sm text-gray-500">Idea & Access Management</p>
+            </div>
+            <button onclick="showMobileView()" class="px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 transition text-sm md:text-base">Return to Mobile View</button>
+        </header>
+        <main id="admin-portal-content" class="bg-white p-2 md:p-6 rounded-lg shadow-md">
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-6">
+                    <button onclick="switchAdminTab('ideas')" id="tab-ideas" class="admin-tab active py-4 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-red-600 hover:border-red-500">
+                        Idea Review
+                    </button>
+                    <button onclick="switchAdminTab('roles')" id="tab-roles" class="admin-tab py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-red-600 hover:border-red-500">
+                        Roles & Permissions
+                    </button>
+                    <button onclick="switchAdminTab('tags')" id="tab-tags" class="admin-tab py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-red-600 hover:border-red-500">
+                        Tag Management
+                    </button>
+                </nav>
+            </div>
+            <div id="admin-ideas-portal" class="admin-portal-tab-content mt-6">
+                <!-- Admin ideas will be injected here as a table -->
+            </div>
+             <div id="admin-roles-portal" class="admin-portal-tab-content hidden mt-6">
+                <!-- Roles and permissions table will be injected here -->
+            </div>
+            <div id="admin-tags-portal" class="admin-portal-tab-content hidden mt-6">
+                <!-- Tag management will be injected here -->
+            </div>
+        </main>
+    </div>
+
     <!-- Modal for notifications -->
     <div id="notification-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white rounded-lg p-6 shadow-xl text-center max-w-sm mx-4">
@@ -452,23 +586,34 @@
         // --- DATA ---
         const appState = {
             user: {
-                name: "Isaac Galang",
+                name: "Jahred Ibanez",
                 stars: 1000,
                 vouchers: [
                     { id: 1, name: "Ate Arls Longsilog", description: "1 Free Longsilog Meal", icon: '🍳' }
                 ]
             },
             ideas: [
-                { id: 1, title: "AI-Powered Customer Support", description: "Integrate an AI chatbot to handle common customer queries, freeing up human agents for more complex issues.", category: "Process Optimization", status: "Approved", progress: 3, totalSteps: 3, starsAwarded: 500 },
-                { id: 2, title: "Eco-Friendly Packaging", description: "Switch to biodegradable materials for all product packaging to reduce our environmental footprint.", category: "Cost Saving", status: "In Review", progress: 2, totalSteps: 3 },
-                { id: 3, title: "Employee Wellness App", description: "Develop a mobile app for employees to track fitness goals, access mental health resources, and join wellness challenges.", category: "New Feature", status: "Rejected", progress: 1, totalSteps: 3 },
-                { id: 4, title: "Gamified Onboarding", description: "Make the new-hire onboarding process more engaging with points, badges, and leaderboards.", category: "Product Improvement", status: "Submitted", progress: 1, totalSteps: 3 },
+                { id: 1, submitter: "Jahred Ibanez", authors: ["Jahred Ibanez"], trackingId: 'INNO-1725164800', title: "AI-Powered Customer Support", lifecycleStage: "Implementation", description: "Integrate an AI chatbot to handle common customer queries, freeing up human agents for more complex issues.", category: "Process Optimization", status: "Implemented", progress: 3, totalSteps: 3, starsAwarded: 1500, attachments: 1, tags: ['AI', 'Automation', 'Support'], comments: [] },
+                { id: 2, submitter: "Jahred Ibanez", authors: ["Jahred Ibanez"], trackingId: 'INNO-1725251200', title: "Eco-Friendly Packaging", lifecycleStage: "Incubation", description: "Switch to biodegradable materials for all product packaging to reduce our environmental footprint.", category: "Cost Saving", status: "Approved", progress: 2, totalSteps: 3, attachments: 2, starsAwarded: 500, tags: ['Sustainability', 'Operations'], comments: [] },
+                { id: 3, submitter: "Jahred Ibanez", authors: ["Jahred Ibanez"], trackingId: 'INNO-1725337600', title: "Employee Wellness App", lifecycleStage: "Idea", description: "Develop a mobile app for employees to track fitness goals, access mental health resources, and join wellness challenges.", category: "New Feature", status: "Rejected", progress: 1, totalSteps: 3, attachments: 0, tags: ['HR', 'Mobile', 'Health'], comments: [] },
+                { id: 4, submitter: "Kim", authors: ["Kim"], trackingId: 'INNO-1725424000', title: "Gamified Onboarding", lifecycleStage: "Idea", description: "Make the new-hire onboarding process more engaging with points, badges, and leaderboards.", category: "Product Improvement", status: "Submitted", progress: 1, totalSteps: 3, attachments: 0, tags: ['HR', 'UX'], comments: [] },
+                { id: 5, submitter: "Trish", authors: ["Trish", "Jahred Ibanez"], trackingId: 'INNO-1725510400', title: "Internal Knowledge Base", lifecycleStage: "Idea", description: "Create a centralized wiki for all internal process documentation to reduce repetitive questions.", category: "Process Optimization", status: "In Review", progress: 2, totalSteps: 3, attachments: 1, tags: ['Documentation', 'Internal Tools'], comments: [
+                    { id: 1, author: 'Kevin', text: 'Great idea, Trish! We should also consider integrating it with the existing HR portal.', timestamp: '2025-09-02T10:00:00', replies: [
+                        { id: 3, author: 'Trish', text: 'Good point! I\'ll add that to the proposal.', timestamp: '2025-09-02T10:05:00', replies: [] }
+                    ]}
+                ] },
+                { id: 6, submitter: "Kevin", authors: ["Kevin"], trackingId: 'INNO-1725596800', title: "Automated Reporting Dashboard", lifecycleStage: "Incubation", description: "Build a real-time dashboard for key business metrics to replace manual weekly reports.", category: "Process Optimization", status: "Approved", progress: 2, totalSteps: 3, attachments: 0, starsAwarded: 500, tags: ['Automation', 'Finance', 'BI'], comments: [] },
+            ],
+            availableTags: ['AI', 'UX', 'Mobile', 'Sustainability', 'HR', 'Automation', 'Finance', 'Support', 'Operations', 'Health', 'Documentation', 'Internal Tools', 'BI'],
+             notifications: [
+                { id: 1, message: 'Your idea "Eco-Friendly Packaging" is now In Review.', timestamp: '2025-09-04T13:10:00', read: true },
+                { id: 2, message: 'Welcome to Inno! Submit your first idea to earn stars.', timestamp: '2025-09-04T13:05:00', read: true }
             ],
             leaderboard: [
                 { rank: 1, name: 'Kim', stars: 5250, medal: '🥇' },
                 { rank: 2, name: 'Kevin', stars: 4800, medal: '🥈' },
                 { rank: 3, name: 'Trish', stars: 4750, medal: '🥉' },
-                { rank: 4, name: 'Isaac', stars: 4500, medal: '' },
+                { rank: 4, name: 'Jahred', stars: 4500, medal: '' },
                 { rank: 5, name: 'Sam', stars: 2100, medal: '' },
             ],
             rewards: [
@@ -481,7 +626,9 @@
                 { id: 1, title: "Success Story: The AI Chatbot", content: "Learn how the AI chatbot idea went from submission to a successful launch, saving over 200 man-hours per week." },
                 { id: 2, title: "Guide: How to Write a Winning Idea", content: "Follow these simple steps to make your idea submission clear, concise, and compelling to the review committee." },
                 { id: 3, title: "Innovation at InnoCorp", content: "A deep dive into the culture of innovation that drives our company forward and how you can be a part of it." },
-            ]
+            ],
+            previousScreen: 'home-screen',
+            currentIdeaId: null,
         };
 
         // --- UI RENDERING & ANIMATION FUNCTIONS ---
@@ -494,6 +641,7 @@
             renderLeaderboard();
             renderProfileStats();
             renderVouchers();
+            updateNotificationIndicator();
         }
         
         function animateValue(obj, start, end, duration) {
@@ -516,31 +664,69 @@
             rewardsEl.textContent = newValue.toLocaleString();
         }
         
+        function getLifecycleTag(stage) {
+            const styles = {
+                'Idea': 'bg-gray-200 text-gray-800',
+                'Incubation': 'bg-blue-200 text-blue-800',
+                'Implementation': 'bg-green-200 text-green-800',
+            };
+            return `<span class="text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full ${styles[stage] || ''}">${stage}</span>`;
+        }
+
+        function renderTags(tags) {
+            if (!tags || tags.length === 0) return '';
+            return `<div class="flex flex-wrap gap-1 mt-2">
+                ${tags.map(tag => `<span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded-full">${tag}</span>`).join('')}
+            </div>`;
+        }
+
+
         function renderIdeaList() {
             const listEl = document.getElementById('idea-list');
             listEl.innerHTML = ''; // Clear existing list
             const progressLabels = ['Submitted', 'In Review', 'Approved'];
 
-            appState.ideas.sort((a,b) => b.id - a.id).forEach(idea => {
+            const userIdeas = appState.ideas.filter(idea => idea.authors.includes(appState.user.name));
+
+
+            userIdeas.sort((a,b) => b.id - a.id).forEach(idea => {
                 let statusText = idea.status;
                 let progressPercentage = (idea.progress / idea.totalSteps) * 100;
                 let progressBarFillClass = 'progress-bar-fill';
+                let statusColor = 'text-gray-600';
                 
-                if (idea.status === 'Approved') {
-                    statusText = `Approved (+${idea.starsAwarded} Stars)`;
+                if (idea.status === 'Approved' || idea.status === 'Implemented') {
+                    statusText = `${idea.status} (+${idea.starsAwarded} Stars)`;
+                    statusColor = 'text-green-600';
                 } else if (idea.status === 'Rejected') {
                     progressPercentage = 100;
                     progressBarFillClass = 'progress-bar-rejected';
+                    statusColor = 'text-red-600';
+                } else if (idea.status === 'Changes Requested') {
+                    statusColor = 'text-yellow-600';
                 }
 
                 const ideaCard = `
-                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm interactive-card">
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm interactive-card" onclick="showIdeaDetails(${idea.id}, 'tracking-screen')">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-gray-800 w-2/3">${idea.title}</h3>
-                            <span class="text-xs font-semibold text-gray-600 text-right">${statusText}</span>
+                             <div>
+                                <h3 class="font-bold text-gray-800">${idea.title}</h3>
+                                <p class="text-xs text-gray-400 font-mono">${idea.trackingId}</p>
+                            </div>
+                            <span class="text-xs font-semibold ${statusColor} text-right">${statusText}</span>
+                        </div>
+                         <div class="flex items-center my-2">
+                            ${getLifecycleTag(idea.lifecycleStage)}
                         </div>
                         <p class="text-sm text-gray-600 mt-2 mb-4">${idea.description}</p>
-                        <div class="mt-3">
+                        ${renderTags(idea.tags)}
+                        ${idea.attachments > 0 ?
+                            `<div class="text-xs text-gray-500 flex items-center mt-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" /></svg>
+                                <span>${idea.attachments} attachment(s)</span>
+                            </div>` : ''
+                        }
+                        <div class="mt-4">
                             <div class="progress-bar">
                                 <div class="${progressBarFillClass}" style="width: 0%;" data-width="${progressPercentage}"></div>
                             </div>
@@ -560,7 +746,7 @@
                 listEl.insertAdjacentHTML('beforeend', ideaCard);
             });
             // Animate progress bars on render
-            document.querySelectorAll('.progress-bar-fill').forEach(bar => {
+            document.querySelectorAll('.progress-bar-fill, .progress-bar-rejected').forEach(bar => {
                 setTimeout(() => {
                    bar.style.width = bar.dataset.width + '%';
                 }, 100);
@@ -590,6 +776,134 @@
                 listEl.innerHTML += personCard;
             });
         }
+
+        function renderAdminIdeaListPortal() {
+            const containerEl = document.getElementById('admin-ideas-portal');
+            if (!containerEl) return;
+            
+            let content = `
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Idea Details</th>
+                                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Submitter</th>
+                                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Lifecycle Stage</th>
+                                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Tags</th>
+                                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+            `;
+
+            appState.ideas.sort((a,b) => b.id - a.id).forEach(idea => {
+                 const isActionable = !['Implemented', 'Rejected'].includes(idea.status);
+                 const canImplement = idea.status === 'Approved' && idea.lifecycleStage === 'Incubation';
+
+                content += `
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="py-3 px-4">
+                            <p class="font-semibold">${idea.title}</p>
+                            <p class="text-xs text-gray-500 font-mono">${idea.trackingId}</p>
+                        </td>
+                        <td class="py-3 px-4 text-sm">${idea.submitter}</td>
+                        <td class="py-3 px-4 text-sm">${getLifecycleTag(idea.lifecycleStage)}</td>
+                        <td class="py-3 px-4 text-sm">${renderTags(idea.tags)}</td>
+                        <td class="py-3 px-4">
+                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-200 text-gray-800">${idea.status}</span>
+                        </td>
+                        <td class="py-3 px-4">
+                             ${ canImplement ? `
+                                <button onclick="implementIdea(${idea.id})" class="px-3 py-1 text-xs font-semibold text-white bg-green-600 rounded-full hover:bg-green-700">Mark Implemented</button>
+                             ` : ''}
+                            ${ isActionable && !canImplement ? `
+                            <div class="flex items-center space-x-2">
+                                <button onclick="approveIdea(${idea.id})" title="Approve" class="p-2 text-green-600 bg-green-100 rounded-full hover:bg-green-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg></button>
+                                <button onclick="rejectIdea(${idea.id})" title="Reject" class="p-2 text-red-600 bg-red-100 rounded-full hover:bg-red-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></button>
+                                <button onclick="requestInfo(${idea.id})" title="Request Info" class="p-2 text-yellow-600 bg-yellow-100 rounded-full hover:bg-yellow-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg></button>
+                            </div>
+                            ` : ''
+                            }
+                            ${ !isActionable ? `<span class="text-xs text-gray-500">Action Taken</span>` : ''}
+                        </td>
+                    </tr>
+                `;
+            });
+
+            content += `</tbody></table></div>`;
+            containerEl.innerHTML = content;
+        }
+        
+        function renderRolesAndPermissions() {
+             const containerEl = document.getElementById('admin-roles-portal');
+            if (!containerEl) return;
+
+            const roles = {
+                'Employee': { 'Submit Idea': true, 'View Own Ideas': true, 'Review Ideas': false, 'Manage Users': false, 'Configure System': false },
+                'Reviewer': { 'Submit Idea': true, 'View Own Ideas': true, 'Review Ideas': true, 'Manage Users': false, 'Configure System': false },
+                'Admin': { 'Submit Idea': true, 'View Own Ideas': true, 'Review Ideas': true, 'Manage Users': true, 'Configure System': true },
+            };
+            const permissions = ['Submit Idea', 'View Own Ideas', 'Review Ideas', 'Manage Users', 'Configure System'];
+            
+            let content = `
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Role</th>
+                                ${permissions.map(p => `<th class="text-center py-3 px-4 uppercase font-semibold text-sm">${p}</th>`).join('')}
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+            `;
+            
+            for (const role in roles) {
+                content += `<tr class="border-b border-gray-200">
+                                <td class="py-3 px-4 font-semibold">${role}</td>
+                                ${permissions.map(p => `
+                                    <td class="py-3 px-4 text-center">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600" ${roles[role][p] ? 'checked' : ''}>
+                                    </td>
+                                `).join('')}
+                            </tr>`;
+            }
+
+            content += `</tbody></table></div>
+                <div class="mt-6 text-right">
+                    <button class="px-6 py-2 bg-gradient-to-br from-red-500 to-red-700 text-white font-semibold rounded-lg hover:shadow-lg transition">Save Changes</button>
+                </div>
+            `;
+            containerEl.innerHTML = content;
+        }
+
+        function renderTagManagement() {
+            const containerEl = document.getElementById('admin-tags-portal');
+            if (!containerEl) return;
+
+            let content = `
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Add New Tag</h3>
+                    <div class="flex space-x-2">
+                        <input type="text" id="new-tag-input" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter new tag name">
+                        <button onclick="addNewTag()" class="px-6 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">Add</button>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Existing Tags</h3>
+                    <div class="flex flex-wrap gap-2">
+                        ${appState.availableTags.sort().map(tag => `
+                            <div class="flex items-center bg-gray-200 text-gray-800 text-sm font-medium px-3 py-1 rounded-full">
+                                <span>${tag}</span>
+                                <button onclick="removeTag('${tag}')" class="ml-2 text-gray-500 hover:text-red-600">&times;</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            containerEl.innerHTML = content;
+        }
+
 
         function renderRewardsList() {
             const listEl = document.getElementById('rewards-list');
@@ -631,8 +945,9 @@
         }
         
         function renderProfileStats() {
-            document.getElementById('ideas-submitted-stat').textContent = appState.ideas.length;
-            document.getElementById('ideas-approved-stat').textContent = appState.ideas.filter(idea => idea.status === 'Approved').length;
+            const userIdeas = appState.ideas.filter(idea => idea.submitter === appState.user.name);
+            document.getElementById('ideas-submitted-stat').textContent = userIdeas.length;
+            document.getElementById('ideas-approved-stat').textContent = userIdeas.filter(idea => idea.status === 'Approved' || idea.status === 'Implemented').length;
         }
 
         function renderVouchers() {
@@ -653,6 +968,77 @@
                     </div>
                 `;
                 listEl.innerHTML += voucherCard;
+            });
+        }
+
+        function populateFilters() {
+            const categoryFilter = document.getElementById('idea-filter-category');
+            const statusFilter = document.getElementById('idea-filter-status');
+            const tagFilter = document.getElementById('idea-filter-tag');
+
+            const categories = ['All Categories', ...new Set(appState.ideas.map(idea => idea.category))];
+            const statuses = ['All Statuses', ...new Set(appState.ideas.map(idea => idea.status))];
+            const tags = ['All Tags', ...appState.availableTags.sort()];
+
+            categoryFilter.innerHTML = categories.map(c => `<option value="${c}">${c}</option>`).join('');
+            statusFilter.innerHTML = statuses.map(s => `<option value="${s}">${s}</option>`).join('');
+            tagFilter.innerHTML = tags.map(t => `<option value="${t}">${t}</option>`).join('');
+        }
+
+        function renderDiscoverIdeas() {
+            const listEl = document.getElementById('discover-idea-list');
+            if (!listEl) return;
+
+            const searchTerm = document.getElementById('idea-search-input').value.toLowerCase();
+            const filterCategory = document.getElementById('idea-filter-category').value;
+            const filterStatus = document.getElementById('idea-filter-status').value;
+            const filterTag = document.getElementById('idea-filter-tag').value;
+
+
+            let filteredIdeas = appState.ideas;
+
+            if (searchTerm) {
+                filteredIdeas = filteredIdeas.filter(idea => 
+                    idea.title.toLowerCase().includes(searchTerm) || 
+                    idea.description.toLowerCase().includes(searchTerm)
+                );
+            }
+            if (filterCategory !== 'All Categories') {
+                filteredIdeas = filteredIdeas.filter(idea => idea.category === filterCategory);
+            }
+            if (filterStatus !== 'All Statuses') {
+                filteredIdeas = filteredIdeas.filter(idea => idea.status === filterStatus);
+            }
+            if (filterTag !== 'All Tags') {
+                filteredIdeas = filteredIdeas.filter(idea => idea.tags.includes(filterTag));
+            }
+
+
+            listEl.innerHTML = '';
+            if (filteredIdeas.length === 0) {
+                listEl.innerHTML = `<p class="text-center text-gray-500 mt-8">No ideas found matching your criteria.</p>`;
+                return;
+            }
+
+            filteredIdeas.forEach(idea => {
+                const ideaCard = `
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm interactive-card" onclick="showIdeaDetails(${idea.id}, 'discover-screen')">
+                        <div class="flex justify-between items-start mb-2">
+                             <div>
+                                <h3 class="font-bold text-gray-800">${idea.title}</h3>
+                                <p class="text-xs text-gray-500">By: <span class="font-semibold">${idea.submitter}</span></p>
+                            </div>
+                            ${getLifecycleTag(idea.lifecycleStage)}
+                        </div>
+                         <p class="text-sm text-gray-600 mt-2 mb-4">${idea.description}</p>
+                        ${renderTags(idea.tags)}
+                        <div class="flex justify-between items-center text-xs text-gray-500 mt-4 border-t pt-2">
+                            <span>Category: <span class="font-semibold">${idea.category}</span></span>
+                            <span>Status: <span class="font-semibold">${idea.status}</span></span>
+                        </div>
+                    </div>
+                `;
+                listEl.insertAdjacentHTML('beforeend', ideaCard);
             });
         }
 
@@ -686,6 +1072,68 @@
             });
         }
 
+        // --- NOTIFICATION LOGIC ---
+        function addNotification(message) {
+            const newNotification = {
+                id: appState.notifications.length + 1,
+                message,
+                timestamp: new Date().toISOString(),
+                read: false
+            };
+            appState.notifications.unshift(newNotification); // Add to the beginning
+            updateNotificationIndicator();
+        }
+
+        function updateNotificationIndicator() {
+            const dot = document.getElementById('notification-dot');
+            const hasUnread = appState.notifications.some(n => !n.read);
+            if (dot) {
+                dot.classList.toggle('hidden', !hasUnread);
+            }
+        }
+
+        function formatTimeAgo(timestamp) {
+            const now = new Date();
+            const notificationDate = new Date(timestamp);
+            const seconds = Math.floor((now - notificationDate) / 1000);
+
+            let interval = seconds / 31536000;
+            if (interval > 1) return Math.floor(interval) + " years ago";
+            interval = seconds / 2592000;
+            if (interval > 1) return Math.floor(interval) + " months ago";
+            interval = seconds / 86400;
+            if (interval > 1) return Math.floor(interval) + " days ago";
+            interval = seconds / 3600;
+            if (interval > 1) return Math.floor(interval) + " hours ago";
+            interval = seconds / 60;
+            if (interval > 1) return Math.floor(interval) + " minutes ago";
+            return "Just now";
+        }
+
+        function renderNotifications() {
+            const listEl = document.getElementById('notification-list');
+            if (!listEl) return;
+            if (appState.notifications.length === 0) {
+                listEl.innerHTML = `<p class="text-center text-gray-500 mt-8">You have no new notifications.</p>`;
+                return;
+            }
+            listEl.innerHTML = appState.notifications.map(n => {
+                const bg = n.read ? 'bg-white' : 'bg-red-50';
+                return `
+                <div class="p-3 rounded-lg ${bg} border border-gray-200 mb-2">
+                    <p class="text-sm text-gray-800">${n.message}</p>
+                    <p class="text-xs text-right text-gray-400 mt-1">${formatTimeAgo(n.timestamp)}</p>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function markNotificationsAsRead() {
+            appState.notifications.forEach(n => n.read = true);
+            updateNotificationIndicator();
+        }
+
+
         // --- NAVIGATION & INTERACTIONS ---
         let currentScreen = 'super-app-home-screen';
         function showScreen(screenId) {
@@ -707,6 +1155,14 @@
                     renderProfileStats();
                     renderVouchers();
                     renderStarChart();
+                } else if (screenId === 'notifications-screen') {
+                    markNotificationsAsRead();
+                    renderNotifications();
+                } else if (screenId === 'discover-screen') {
+                    populateFilters();
+                    renderDiscoverIdeas();
+                } else if (screenId === 'submission-screen') {
+                    populateExistingTagsForSubmission();
                 }
                 
                 setTimeout(() => {
@@ -716,37 +1172,170 @@
             currentScreen = screenId;
         }
 
+        function showAdminPortal() {
+            document.getElementById('mobile-app-frame').classList.add('hidden');
+            document.getElementById('admin-portal').classList.remove('hidden');
+            renderAdminIdeaListPortal();
+            renderRolesAndPermissions();
+            renderTagManagement();
+            switchAdminTab('ideas'); // Default to ideas tab
+        }
+
+        function showMobileView() {
+            document.getElementById('admin-portal').classList.add('hidden');
+            document.getElementById('mobile-app-frame').classList.remove('hidden');
+        }
+        
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-portal-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.admin-tab').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(`admin-${tabName}-portal`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+        }
+
+        function populateExistingTagsForSubmission() {
+            const container = document.getElementById('existing-tags-container');
+            container.innerHTML = appState.availableTags.sort().map(tag => `
+                <label class="flex items-center space-x-2 p-1 rounded-md hover:bg-gray-100">
+                    <input type="checkbox" name="idea-tags" value="${tag}" class="form-checkbox h-4 w-4 text-red-600 rounded">
+                    <span class="text-sm">${tag}</span>
+                </label>
+            `).join('');
+        }
+
         document.getElementById('idea-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const title = document.getElementById('idea-title').value;
             const description = document.getElementById('idea-description').value;
             const category = document.getElementById('idea-category').value;
+            const attachments = document.getElementById('idea-attachments').files;
+
+             // Get selected tags
+            const selectedTags = Array.from(document.querySelectorAll('input[name="idea-tags"]:checked')).map(el => el.value);
+
+            // Get suggested tags and add them to master list if they don't exist
+            const suggestedTagsInput = document.getElementById('suggest-tags');
+            const newTags = suggestedTagsInput.value.split(',')
+                .map(t => t.trim())
+                .filter(t => t.length > 0 && !appState.availableTags.includes(t));
+            
+            if (newTags.length > 0) {
+                appState.availableTags.push(...newTags);
+            }
+            
+            const allTags = [...new Set([...selectedTags, ...newTags])];
 
             if (!title || !description) {
-                showModal('Error', 'Please fill in all fields.', 'error');
+                showModal('Error', 'Please fill in all required fields.', 'error');
                 return;
             }
 
+            const trackingId = `INNO-${Date.now()}`;
+
             const newIdea = {
-                id: appState.ideas.length + 1,
+                id: appState.ideas.length + 5, // Use a more unique ID generation in a real app
+                submitter: appState.user.name,
+                authors: [appState.user.name],
+                trackingId,
                 title,
                 description,
                 category,
                 status: 'Submitted',
+                lifecycleStage: 'Idea',
                 progress: 1,
-                totalSteps: 3
+                totalSteps: 3,
+                attachments: attachments.length,
+                tags: allTags,
+                comments: []
             };
             appState.ideas.push(newIdea);
             
             this.reset();
             renderProfileStats();
-            showModal('Success!', 'Your idea has been submitted for review.');
+            addNotification(`You submitted a new idea: "${title}".`);
+            showModal('Success!', `Your idea's tracking ID is: ${trackingId}`);
             setTimeout(() => {
                 closeModal();
                 showScreen('tracking-screen');
-            }, 1500);
+            }, 2500);
         });
         
+        function approveIdea(ideaId) {
+            const idea = appState.ideas.find(i => i.id === ideaId);
+            if (idea) {
+                const oldStars = appState.user.stars;
+                idea.status = 'Approved';
+                idea.lifecycleStage = 'Incubation';
+                idea.progress = 2; // Move to 'In Review' visually
+                idea.starsAwarded = 500; // Initial award for approval
+                // Find user and award stars - in a real app this would be more robust
+                if (idea.submitter === appState.user.name) {
+                    appState.user.stars += idea.starsAwarded;
+                }
+                addNotification(`Congratulations! Your idea "${idea.title}" has been approved. You've earned ${idea.starsAwarded} stars.`);
+                renderAdminIdeaListPortal();
+                renderStarBalance(oldStars, appState.user.stars);
+                showModal('Approved', `Idea ${idea.trackingId} has been approved and moved to Incubation.`);
+            }
+        }
+
+        function implementIdea(ideaId) {
+            const idea = appState.ideas.find(i => i.id === ideaId);
+             if (idea) {
+                const oldStars = appState.user.stars;
+                const implementationBonus = 1000;
+                idea.status = 'Implemented';
+                idea.lifecycleStage = 'Implementation';
+                idea.progress = 3;
+                idea.starsAwarded += implementationBonus;
+                if (idea.submitter === appState.user.name) {
+                    appState.user.stars += implementationBonus;
+                }
+                addNotification(`Amazing news! Your idea "${idea.title}" has been implemented. You've earned a bonus of ${implementationBonus} stars.`);
+                renderAdminIdeaListPortal();
+                renderStarBalance(oldStars, appState.user.stars);
+                showModal('Implemented!', `Idea ${idea.trackingId} has been marked as implemented. A bonus of ${implementationBonus} stars was awarded.`);
+            }
+        }
+
+        function rejectIdea(ideaId) {
+            const idea = appState.ideas.find(i => i.id === ideaId);
+            if (idea) {
+                idea.status = 'Rejected';
+                idea.lifecycleStage = 'Idea';
+                addNotification(`An update on your idea "${idea.title}": it has been rejected after review.`);
+                renderAdminIdeaListPortal();
+                showModal('Rejected', `Idea ${idea.trackingId} has been rejected.`, 'error');
+            }
+        }
+
+        function requestInfo(ideaId) {
+            const idea = appState.ideas.find(i => i.id === ideaId);
+            if (idea) {
+                idea.status = 'Changes Requested';
+                idea.lifecycleStage = 'Idea';
+                 addNotification(`The review team has requested changes for your idea: "${idea.title}".`);
+                renderAdminIdeaListPortal();
+                showModal('Info Requested', `Idea ${idea.trackingId} has been marked as 'Changes Requested'.`);
+            }
+        }
+
+         function addNewTag() {
+            const input = document.getElementById('new-tag-input');
+            const newTag = input.value.trim();
+            if (newTag && !appState.availableTags.includes(newTag)) {
+                appState.availableTags.push(newTag);
+                renderTagManagement();
+                input.value = '';
+            }
+        }
+
+        function removeTag(tagToRemove) {
+            appState.availableTags = appState.availableTags.filter(tag => tag !== tagToRemove);
+            renderTagManagement();
+        }
+
         function redeemReward(rewardId) {
             const reward = appState.rewards.find(r => r.id === rewardId);
             if (appState.user.stars >= reward.cost) {
@@ -934,3 +1523,4 @@
     </script>
 </body>
 </html>
+
