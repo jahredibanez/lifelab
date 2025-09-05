@@ -126,7 +126,7 @@
             margin-bottom: 4px;
         }
         
-        .admin-tab.active {
+        .admin-tab.active, .leaderboard-tab.active {
             border-bottom-color: #dc2626;
             color: #dc2626;
             font-weight: 600;
@@ -383,11 +383,24 @@
                         <button onclick="showScreen('home-screen')" class="p-2 -ml-2 rounded-full hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
-                        <h1 class="text-xl font-bold text-gray-800 ml-2">Top Innovators</h1>
+                        <h1 class="text-xl font-bold text-gray-800 ml-2">Leaderboard</h1>
                     </header>
-                    <div class="px-4 pb-20 flex-grow mobile-screen-content overflow-y-auto">
-                        <div id="leaderboard-list" class="space-y-3">
-                            <!-- Dynamic content will be injected here -->
+                    <div class="px-4 border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-6">
+                            <button onclick="switchLeaderboardTab('individuals')" id="leaderboard-tab-individuals" class="leaderboard-tab active py-3 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-red-600 hover:border-red-500">
+                                Individuals
+                            </button>
+                            <button onclick="switchLeaderboardTab('divisions')" id="leaderboard-tab-divisions" class="leaderboard-tab py-3 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-red-600 hover:border-red-500">
+                                Divisions
+                            </button>
+                        </nav>
+                    </div>
+                    <div class="px-4 pt-4 pb-20 flex-grow mobile-screen-content overflow-y-auto">
+                        <div id="leaderboard-individuals-content" class="leaderboard-tab-content space-y-3">
+                            <!-- Individual leaderboard content -->
+                        </div>
+                         <div id="leaderboard-divisions-content" class="leaderboard-tab-content hidden space-y-3">
+                            <!-- Division leaderboard content -->
                         </div>
                     </div>
                 </div>
@@ -608,11 +621,18 @@
                 { id: 2, message: 'Welcome to Inno! Submit your first idea to earn stars.', timestamp: '2025-09-04T13:05:00', read: true }
             ],
             leaderboard: [
-                { rank: 1, name: 'Kim', stars: 5250, medal: '🥇' },
-                { rank: 2, name: 'Kevin', stars: 4800, medal: '🥈' },
-                { rank: 3, name: 'Trish', stars: 4750, medal: '🥉' },
-                { rank: 4, name: 'Jahred', stars: 4500, medal: '' },
-                { rank: 5, name: 'Sam', stars: 2100, medal: '' },
+                { rank: 1, name: 'Kim', stars: 5250, medal: '🥇', division: 'LifeLab' },
+                { rank: 2, name: 'Kevin', stars: 4800, medal: '🥈', division: 'IT Division' },
+                { rank: 3, name: 'Trish', stars: 4750, medal: '🥉', division: 'CommOps' },
+                { rank: 4, name: 'Jahred', stars: 4500, medal: '', division: 'IT Division' },
+                { rank: 5, name: 'Sam', stars: 2100, medal: '', division: 'HROD' },
+            ],
+            divisions: [
+                { rank: 1, name: 'LifeLab', stars: 15000, medal: '🥇' },
+                { rank: 1, name: 'CommOps', stars: 15000, medal: '🥇' },
+                { rank: 1, name: 'IT Division', stars: 15000, medal: '🥇' },
+                { rank: 1, name: 'HROD', stars: 15000, medal: '🥇' },
+                { rank: 1, name: 'CorpGov', stars: 15000, medal: '🥇' },
             ],
             rewards: [
                 { id: 1, name: "Coffee Voucher", cost: 250, icon: '☕️' },
@@ -636,7 +656,8 @@
             renderIdeaList();
             renderRewardsList();
             renderKnowledgeList();
-            renderLeaderboard();
+            renderIndividualLeaderboard();
+            renderDivisionLeaderboard();
             renderProfileStats();
             renderVouchers();
             updateNotificationIndicator();
@@ -760,8 +781,8 @@
             });
         }
 
-        function renderLeaderboard() {
-            const listEl = document.getElementById('leaderboard-list');
+        function renderIndividualLeaderboard() {
+            const listEl = document.getElementById('leaderboard-individuals-content');
             listEl.innerHTML = '';
             appState.leaderboard.forEach(person => {
                 const isUser = person.name.toLowerCase() === appState.user.name.split(' ')[0].toLowerCase();
@@ -773,6 +794,7 @@
                         <div class="w-10 text-center ${rankColor} text-xl">${person.medal || person.rank}</div>
                         <div class="flex-grow ml-4">
                             <p class="font-bold text-gray-800">${person.name}</p>
+                            <p class="text-xs text-gray-500">${person.division}</p>
                         </div>
                         <div class="flex items-center space-x-1 text-yellow-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
@@ -783,6 +805,34 @@
                 listEl.innerHTML += personCard;
             });
         }
+        
+        function renderDivisionLeaderboard() {
+            const listEl = document.getElementById('leaderboard-divisions-content');
+            listEl.innerHTML = '';
+            appState.divisions.sort((a,b) => b.stars - a.stars).forEach((division, index) => {
+                const rank = index + 1;
+                let medal = '';
+                if (rank === 1) medal = '🥇';
+                if (rank === 2) medal = '🥈';
+                if (rank === 3) medal = '🥉';
+                const rankColor = rank <= 3 ? 'text-red-600 font-bold' : 'text-gray-500';
+
+                const divisionCard = `
+                    <div class="flex items-center p-3 rounded-lg border bg-white interactive-card">
+                        <div class="w-10 text-center ${rankColor} text-xl">${medal || rank}</div>
+                        <div class="flex-grow ml-4">
+                            <p class="font-bold text-gray-800">${division.name}</p>
+                        </div>
+                        <div class="flex items-center space-x-1 text-yellow-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                            <span class="font-bold text-sm">${division.stars.toLocaleString()}</span>
+                        </div>
+                    </div>
+                `;
+                listEl.innerHTML += divisionCard;
+            });
+        }
+
 
         function renderAdminIdeaListPortal() {
             const containerEl = document.getElementById('admin-ideas-portal');
@@ -1175,7 +1225,9 @@
                 if (screenId === 'tracking-screen') {
                     renderIdeaList();
                 } else if (screenId === 'leaderboard-screen') {
-                    renderLeaderboard();
+                    renderIndividualLeaderboard();
+                    renderDivisionLeaderboard();
+                    switchLeaderboardTab('individuals');
                 } else if (screenId === 'profile-screen') {
                     renderProfileStats();
                     renderVouchers();
@@ -1195,6 +1247,14 @@
                 }, 400);
             }
             currentScreen = screenId;
+        }
+
+        function switchLeaderboardTab(tabName) {
+            document.querySelectorAll('.leaderboard-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.leaderboard-tab').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(`leaderboard-${tabName}-content`).classList.remove('hidden');
+            document.getElementById(`leaderboard-tab-${tabName}`).classList.add('active');
         }
 
         function showAdminPortal() {
