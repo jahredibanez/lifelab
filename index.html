@@ -243,7 +243,7 @@
                              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                             <p class="font-semibold text-sm">Knowledge Bank</p>
                         </div>
-                        <div onclick="showScreen('chatbot-screen')" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
+                        <div onclick="openChatbot()" class="bg-gray-100 p-4 rounded-xl text-center cursor-pointer interactive-card">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                             </svg>
@@ -591,6 +591,20 @@
         </div>
     </div>
     
+    <!-- API Key Modal -->
+    <div id="api-key-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 shadow-xl max-w-sm mx-4">
+            <h3 class="text-lg font-medium text-gray-900">Enter Gemini API Key</h3>
+            <p class="text-sm text-gray-500 mt-2">To use the AI chatbot, please provide your Gemini API key. You can get one from Google AI Studio.</p>
+            <input type="password" id="api-key-input" class="w-full mt-4 px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" placeholder="Paste your API key here">
+            <p id="api-key-error" class="text-red-500 text-xs mt-1 hidden">Please enter a valid API key.</p>
+            <div class="mt-4 flex justify-end space-x-2">
+                <button onclick="closeApiKeyModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Cancel</button>
+                <button onclick="saveApiKey()" class="px-4 py-2 bg-gradient-to-br from-red-500 to-red-700 text-white rounded-md hover:shadow-lg">Save & Continue</button>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         // --- DATA ---
@@ -1595,7 +1609,33 @@
         const geminiChatMessages = document.getElementById('gemini-chat-messages');
         const geminiSubmitButton = geminiForm.querySelector('button');
         let chatHistory = [];
-        const geminiApiKey = ""; // API key is handled by the environment.
+        let geminiApiKey = '';
+
+        function openChatbot() {
+            if (!geminiApiKey) {
+                document.getElementById('api-key-modal').classList.remove('hidden');
+            } else {
+                showScreen('chatbot-screen');
+            }
+        }
+
+        function closeApiKeyModal() {
+            document.getElementById('api-key-modal').classList.add('hidden');
+        }
+
+        function saveApiKey() {
+            const keyInput = document.getElementById('api-key-input');
+            const errorEl = document.getElementById('api-key-error');
+            const key = keyInput.value.trim();
+            if (key) {
+                geminiApiKey = key;
+                errorEl.classList.add('hidden');
+                closeApiKeyModal();
+                showScreen('chatbot-screen');
+            } else {
+                errorEl.classList.remove('hidden');
+            }
+        }
 
         geminiForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -1716,4 +1756,5 @@
     </script>
 </body>
 </html>
+
 
